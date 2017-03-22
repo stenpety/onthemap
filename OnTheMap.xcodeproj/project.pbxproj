@@ -54,14 +54,38 @@
 		1A4152901E82A1CD0089DB3F /* OnTheMap */ = {
 			isa = PBXGroup;
 			children = (
+				1A4152A51E82A40C0089DB3F /* Model */,
+				1A4152A41E82A3F60089DB3F /* ViewControllers */,
 				1A4152911E82A1CD0089DB3F /* AppDelegate.swift */,
-				1A4152931E82A1CD0089DB3F /* ViewController.swift */,
-				1A4152951E82A1CD0089DB3F /* Main.storyboard */,
-				1A4152981E82A1CD0089DB3F /* Assets.xcassets */,
-				1A41529A1E82A1CD0089DB3F /* LaunchScreen.storyboard */,
+				1A4152A31E82A1EC0089DB3F /* Assets */,
 				1A41529D1E82A1CD0089DB3F /* Info.plist */,
 			);
 			path = OnTheMap;
+			sourceTree = "<group>";
+		};
+		1A4152A31E82A1EC0089DB3F /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				1A41529A1E82A1CD0089DB3F /* LaunchScreen.storyboard */,
+				1A4152951E82A1CD0089DB3F /* Main.storyboard */,
+				1A4152981E82A1CD0089DB3F /* Assets.xcassets */,
+			);
+			name = Assets;
+			sourceTree = "<group>";
+		};
+		1A4152A41E82A3F60089DB3F /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				1A4152931E82A1CD0089DB3F /* ViewController.swift */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		1A4152A51E82A40C0089DB3F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -263,6 +287,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = N47XY52856;
 				INFOPLIST_FILE = OnTheMap/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = stenpety.OnTheMap;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -276,6 +301,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = N47XY52856;
 				INFOPLIST_FILE = OnTheMap/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = stenpety.OnTheMap;
 				PRODUCT_NAME = "$(TARGET_NAME)";
