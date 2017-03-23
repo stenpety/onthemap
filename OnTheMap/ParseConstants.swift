@@ -36,6 +36,7 @@ extension ParseClient {
         case delete = "DELETE"
     }
     
+    // MARK: Keys for request/response dictionaries
     struct ParseResponseKeys {
         static let results = "results"
         static let objectID = "objectID"
@@ -49,6 +50,11 @@ extension ParseClient {
         static let createdAt = "createdAt"
         static let updatedAt = "updatedAt"
         static let acl = "ACL"
+    }
+    
+    struct UdacityResponseKeys {
+        static let session = "session"
+        static let id = "id"
     }
     
     

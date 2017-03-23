@@ -16,7 +16,7 @@ class ParseClient: NSObject {
     
     // MARK: Methods
     // Create a data task for any specified method
-    func taskForMethod(_ method: MethodTypes, withURL url: URL, httpHeader: [String:String], httpBody: String, completionHandlerForTask: @escaping (_ result: AnyObject?, _ error: NSError?) ->Void ) -> URLSessionDataTask {
+    func taskForMethod(_ method: MethodTypes, withURL url: URL, httpHeaderFieldValue httpHeader: [String:String], httpBody: String, completionHandlerForTask: @escaping (_ result: AnyObject?, _ error: NSError?) ->Void ) -> URLSessionDataTask {
         
         // Make and configure URL request
         let request = NSMutableURLRequest(url: url)
@@ -31,6 +31,7 @@ class ParseClient: NSObject {
             
             // Aux function to send Errors
             func sendError(_ error: String) {
+                print(error)
                 let userInfo = [NSLocalizedDescriptionKey:error]
                 completionHandlerForTask(nil, NSError(domain: "taskForMethod", code: 1, userInfo: userInfo))
             }
@@ -43,7 +44,13 @@ class ParseClient: NSObject {
             
             // Check whether a response value is valid
             guard let statusCode = (response as? HTTPURLResponse)?.statusCode, statusCode >= 200 && statusCode <= 299 else {
-                sendError("Request returned a status code other than 2xx")
+                if let statusCode = (response as? HTTPURLResponse)?.statusCode {
+                    sendError("Request returned a status code other than 2xx: \(statusCode)")
+                } else {
+                    sendError("Request returned a status code other than 2xx")
+                }
+                
+                
                 return
             }
             
@@ -85,6 +92,14 @@ class ParseClient: NSObject {
         }
         
         return components.url!
+    }
+    
+    // Make a singleton shared instance
+    class func sharedInstance() -> ParseClient {
+        struct Singleton {
+            static var sharedInstance = ParseClient()
+        }
+        return Singleton.sharedInstance
     }
     
 }

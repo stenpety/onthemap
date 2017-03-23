@@ -9,17 +9,36 @@
 import UIKit
 
 class LoginViewController: UIViewController {
-
+    
+    // MARK: Outlets
+    
+    @IBOutlet weak var loginTextField: UITextField!
+    @IBOutlet weak var passwordTextField: UITextField!
+    
+    
+    // MARK: Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    // MARK: Actions
+    
+    @IBAction private func loginWithUdacity(_ sender: UIButton) {
+        
+        if let userName = loginTextField.text, let password = passwordTextField.text {
+            let urlForLoginWithUdacity = ParseClient.sharedInstance().makeURL(apiHost: ParseClient.Constants.UdacityApiHost, apiPath: ParseClient.Constants.UdacityApiPath, withExtension: nil, parameters: nil)
+            let _ = ParseClient.sharedInstance().taskForMethod(ParseClient.MethodTypes.post, withURL: urlForLoginWithUdacity, httpHeaderFieldValue: ["Accept":"application/json", "Content-Type":"application/json"], httpBody: "{\"udacity\": {\"username\": \"\(userName)\", \"password\": \"\(password)\"}}", completionHandlerForTask: {(data, error) in
+//                let postSession = data as! [String:AnyObject]
+//                let sessionInfo = postSession[ParseClient.UdacityResponseKeys.session] as! [String:AnyObject]
+//                let sessionID = sessionInfo[ParseClient.UdacityResponseKeys.id] as! String
+//                
+//                print("Session ID is: \(sessionID)")
+            })
+        }
+        
     }
-
-
+    
+    
 }
 

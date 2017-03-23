@@ -35,18 +35,21 @@
                                         <rect key="frame" x="0.0" y="108" width="343" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PZT-yi-heF">
                                         <rect key="frame" x="0.0" y="146" width="343" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dtf-x0-Drj">
                                         <rect key="frame" x="0.0" y="184" width="343" height="36"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <state key="normal" title="Login with Udacity"/>
+                                        <connections>
+                                            <action selector="loginWithUdacity:" destination="BYZ-38-t0r" eventType="touchUpInside" id="nRR-Su-f6m"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>
@@ -69,6 +72,10 @@
                             <constraint firstAttribute="trailingMargin" secondItem="ime-hM-FtX" secondAttribute="trailing" id="zto-hH-t9D"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="loginTextField" destination="tfj-xt-wBz" id="ahh-5g-YCZ"/>
+                        <outlet property="passwordTextField" destination="PZT-yi-heF" id="SqZ-da-DZg"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
