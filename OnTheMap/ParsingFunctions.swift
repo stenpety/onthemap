@@ -23,13 +23,20 @@ extension ParseClient {
                     
                     // Set client shared instance's property: sessionID
                     let sessionInfo = postSession[ParseClient.UdacityResponseKeys.session] as! [String:AnyObject]
-                    let sessionID = sessionInfo[ParseClient.UdacityResponseKeys.id] as! String
-                    ParseClient.sharedInstance().sessionID = sessionID
+                    if let sessionID = sessionInfo[ParseClient.UdacityResponseKeys.id] as? String {
+                        ParseClient.sharedInstance().sessionID = sessionID
+                    } else {
+                        completionHandlerForLogin(false, NSError(domain: "getSessionAndUserID", code: 1, userInfo: [NSLocalizedDescriptionKey:"Cannot retrieve info: \(ParseClient.UdacityResponseKeys.id)"]))
+                    }
+                    
                     
                     // Set client shared instance's property: userID
                     let accountInfo = postSession[ParseClient.UdacityResponseKeys.account] as! [String:AnyObject]
-                    let userID = accountInfo[ParseClient.UdacityResponseKeys.key] as! String
-                    ParseClient.sharedInstance().userID = userID
+                    if let userID = accountInfo[ParseClient.UdacityResponseKeys.key] as? String {
+                        ParseClient.sharedInstance().userID = userID
+                    } else {
+                        completionHandlerForLogin(false, NSError(domain: "getSessionAndUserID", code: 1, userInfo: [NSLocalizedDescriptionKey:"Cannot retrieve info: \(ParseClient.UdacityResponseKeys.key)"]))
+                    }
                     
                     // Launch completion handler with parms for successful option
                     completionHandlerForLogin(true, nil)
