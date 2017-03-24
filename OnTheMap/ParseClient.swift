@@ -49,26 +49,30 @@ class ParseClient: NSObject {
                 } else {
                     sendError("Request returned a status code other than 2xx")
                 }
-                
-                
                 return
             }
             
             // Check for returned data
-            guard let returnedData = data else {
+            guard var returnedData = data else {
                 sendError("Request returned no data")
                 return
+            }
+            
+            // Remove first 5x symbols (for Udacity non-Parse responses only)
+            if url.description.contains("www.udacity.com/api") {
+                let range = Range(5 ..< returnedData.count)
+                returnedData = returnedData.subdata(in: range)
             }
             
             // Serialize the returned data and transmit it to completion handler
             var parsedData: AnyObject! = nil
             do {
                 parsedData = try JSONSerialization.jsonObject(with: returnedData, options: .allowFragments) as AnyObject
+                completionHandlerForTask(parsedData, nil)
             } catch {
                 sendError("Could not parse returned data")
+                return
             }
-            
-            completionHandlerForTask(parsedData, nil)
             
         })
         task.resume()
