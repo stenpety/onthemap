@@ -29,7 +29,16 @@ class LoginViewController: UIViewController {
             if success {
                 print("Session ID: ", ParseClient.sharedInstance().sessionID!)
                 print("User ID: ", ParseClient.sharedInstance().userID!)
-                
+                ParseClient.sharedInstance().getInitialUserInfo(completionHandlerForGetIserInfo: {(success, error) in
+                    if success {
+                        print("First Name: ", ParseClient.sharedInstance().userFirstName!)
+                        print("Last Name: ", ParseClient.sharedInstance().userLastName!)
+                    } else {
+                        print("ERROR: ", error!)
+                    }
+                    
+                    
+                })
             } else {
                 print("ERROR: ", error!)
             }

@@ -13,11 +13,13 @@ class ParseClient: NSObject {
     // MARK: Properties
     var sessionID: String? = nil
     var userID: String? = nil
+    var userFirstName: String? = nil
+    var userLastName: String? = nil
     var studentLocations = [StudentLocation]()
     
     // MARK: Methods
     // Create a data task for any specified method
-    func taskForMethod(_ method: MethodTypes, withURL url: URL, httpHeaderFieldValue httpHeader: [String:String], httpBody: String, completionHandlerForTask: @escaping (_ result: AnyObject?, _ error: NSError?) ->Void ) -> URLSessionDataTask {
+    func taskForMethod(_ method: MethodTypes, withURL url: URL, httpHeaderFieldValue httpHeader: [String:String], httpBody: String?, completionHandlerForTask: @escaping (_ result: AnyObject?, _ error: NSError?) ->Void ) -> URLSessionDataTask {
         
         // Make and configure URL request
         let request = NSMutableURLRequest(url: url)
@@ -25,7 +27,10 @@ class ParseClient: NSObject {
         for (field, value) in httpHeader {
             request.addValue(value, forHTTPHeaderField: field)
         }
-        request.httpBody = httpBody.data(using: String.Encoding.utf8)
+        
+        if let httpBody = httpBody {
+            request.httpBody = httpBody.data(using: String.Encoding.utf8)
+        }
         
         // Send a request
         let task = URLSession.shared.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) in

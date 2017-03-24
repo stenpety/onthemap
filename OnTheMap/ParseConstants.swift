@@ -37,6 +37,7 @@ extension ParseClient {
     }
     
     // MARK: Keys for request/response dictionaries
+    // Example: get-student-location.json
     struct ParseResponseKeys {
         static let results = "results"
         static let objectID = "objectID"
@@ -52,6 +53,7 @@ extension ParseClient {
         static let acl = "ACL"
     }
     
+    // Example: post-session.json
     struct UdacityResponseKeys {
         static let session = "session"
         static let id = "id"
@@ -60,5 +62,10 @@ extension ParseClient {
         static let key = "key"
     }
     
-    
+    // Example: get-user-data.json
+    struct UdacityUserData {
+        static let user = "user"
+        static let firstName = "first_name"
+        static let lastName = "last_name"
+    }
 }
