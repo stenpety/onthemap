@@ -55,6 +55,9 @@ extension ParseClient {
     struct UdacityResponseKeys {
         static let session = "session"
         static let id = "id"
+        static let account = "account"
+        static let registered = "registered"
+        static let key = "key"
     }
     
     

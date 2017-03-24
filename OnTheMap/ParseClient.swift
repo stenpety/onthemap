@@ -12,6 +12,7 @@ class ParseClient: NSObject {
     
     // MARK: Properties
     var sessionID: String? = nil
+    var userID: String? = nil
     var studentLocations = [StudentLocation]()
     
     // MARK: Methods

@@ -11,7 +11,6 @@ import UIKit
 class LoginViewController: UIViewController {
     
     // MARK: Outlets
-    
     @IBOutlet weak var loginTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     
@@ -26,25 +25,15 @@ class LoginViewController: UIViewController {
     
     @IBAction private func loginWithUdacity(_ sender: UIButton) {
         
-        if let userName = loginTextField.text, let password = passwordTextField.text {
-            let urlForLoginWithUdacity = ParseClient.sharedInstance().makeURL(apiHost: ParseClient.Constants.UdacityApiHost, apiPath: ParseClient.Constants.UdacityApiPath, withExtension: "/session", parameters: nil)
-            let _ = ParseClient.sharedInstance().taskForMethod(ParseClient.MethodTypes.post, withURL: urlForLoginWithUdacity, httpHeaderFieldValue: ["Accept":"application/json", "Content-Type":"application/json"], httpBody: "{\"udacity\": {\"username\": \"\(userName)\", \"password\": \"\(password)\"}}", completionHandlerForTask: {(data, error) in
-                if error == nil {
-                    print("SUCCESS!!!")
-                    let postSession = data as! [String:AnyObject]
-                    let sessionInfo = postSession[ParseClient.UdacityResponseKeys.session] as! [String:AnyObject]
-                    let sessionID = sessionInfo[ParseClient.UdacityResponseKeys.id] as! String
-                    
-                    // Set client shared instance's property
-                    ParseClient.sharedInstance().sessionID = sessionID
-                    self.completeLogin()
-                } else {
-                    // Print any delivered error
-                    print(error as Any)
-                    return
-                }
-            })
-        }
+        ParseClient.sharedInstance().getSessionAndUserID(loginVC: self, completionHandlerForLogin: {(success, error) in
+            if success {
+                print("Session ID: ", ParseClient.sharedInstance().sessionID!)
+                print("User ID: ", ParseClient.sharedInstance().userID!)
+                
+            } else {
+                print("ERROR: ", error!)
+            }
+        })
         
     }
     
