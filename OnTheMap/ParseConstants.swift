@@ -34,19 +34,19 @@ extension ParseClient {
         static let appJSON = "application/json"
         
         // API keys for Parse/Udacity
-        static let parseAppID = "QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr"
         static let restAPIKey = "QuWThTdiRmTux3YaDseUSEpUKo7aBYM737yKd4gY"
+        static let parseAppID = "QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr"
         
         // API keys for Facebook
         static let facebookApiID = "365362206864879"
         static let facebookURLSchemeSuffix = "onthemap"
-        
-        
     }
     
-    
-
-    
+    // Array of common parameters: API keys for Parse
+    struct JSONHeaderCommon {
+        static let jsonHeaderCommonParse = [JSONHeaderField.xParseREST:JSONHeaderValues.restAPIKey,
+                                            JSONHeaderField.xParseAppID:JSONHeaderValues.parseAppID]
+    }
     
     // MARK: Types of HTTP Methods
     enum MethodTypes: String {

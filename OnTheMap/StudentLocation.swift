@@ -18,7 +18,7 @@ struct StudentLocation {
     var latitude: Double
     var longitude: Double
     
-    init(locationDictionary: [String:AnyObject]) throws {
+    init(_ locationDictionary: [String:AnyObject]) throws {
         if let objectID = locationDictionary[ParseClient.ParseResponseKeys.objectID] as? String,
         let uniqueKey = locationDictionary[ParseClient.ParseResponseKeys.uniqueKey] as? String,
         let firstName = locationDictionary[ParseClient.ParseResponseKeys.firstName] as? String,
@@ -36,7 +36,7 @@ struct StudentLocation {
             self.latitude = latitude
             self.longitude = longitude
         } else {
-            throw NSError(domain: "Could not initialize Student Location", code: 1, userInfo: nil)
+            throw NSError(domain: "StudentLocation.init", code: 1, userInfo: [NSLocalizedDescriptionKey:"Could not initialize Student Location"])
         }
     }
 }

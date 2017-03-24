@@ -19,7 +19,7 @@ class ParseClient: NSObject {
     
     // MARK: Methods
     // Create a data task for any specified method
-    func taskForMethod(_ method: MethodTypes, withURL url: URL, httpHeaderFieldValue httpHeader: [String:String], httpBody: String?, completionHandlerForTask: @escaping (_ result: AnyObject?, _ error: NSError?) ->Void ) -> URLSessionDataTask {
+    func taskForMethod(_ method: MethodTypes, withURL url: URL, httpHeaderFieldValue httpHeader: [String:String], httpBody: String?, completionHandlerForTask: @escaping (_ result: AnyObject?, _ error: NSError?) throws -> Void ) -> URLSessionDataTask {
         
         // Make and configure URL request
         let request = NSMutableURLRequest(url: url)
@@ -39,7 +39,7 @@ class ParseClient: NSObject {
             func sendError(_ error: String) {
                 print(error)
                 let userInfo = [NSLocalizedDescriptionKey:error]
-                completionHandlerForTask(nil, NSError(domain: "taskForMethod", code: 1, userInfo: userInfo))
+                try! completionHandlerForTask(nil, NSError(domain: "taskForMethod", code: 1, userInfo: userInfo))
             }
             
             // Check for errors in returned data
@@ -74,7 +74,7 @@ class ParseClient: NSObject {
             var serializedData: AnyObject! = nil
             do {
                 serializedData = try JSONSerialization.jsonObject(with: returnedData, options: .allowFragments) as AnyObject
-                completionHandlerForTask(serializedData, nil)
+                try! completionHandlerForTask(serializedData, nil)
             } catch {
                 sendError("Could not parse returned data")
                 return

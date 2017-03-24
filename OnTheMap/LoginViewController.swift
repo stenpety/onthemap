@@ -33,6 +33,12 @@ class LoginViewController: UIViewController {
                     if success {
                         print("First Name: ", ParseClient.sharedInstance().userFirstName!)
                         print("Last Name: ", ParseClient.sharedInstance().userLastName!)
+                        ParseClient.sharedInstance().getAllStudentLocations(completionHandlerForGetAllStudentLocations: {(success, error) in
+                            if success {
+                                print(ParseClient.sharedInstance().studentLocations.count)
+                            }
+                            // TODO: Handle error
+                        })
                     } else {
                         print("ERROR: ", error!)
                     }
