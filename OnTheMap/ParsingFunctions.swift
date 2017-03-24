@@ -16,7 +16,7 @@ extension ParseClient {
         
         if let userName = loginVC.loginTextField.text, let password = loginVC.passwordTextField.text {
             let urlForLoginWithUdacity = ParseClient.sharedInstance().makeURL(apiHost: ParseClient.Constants.UdacityApiHost, apiPath: ParseClient.Constants.UdacityApiPath, withExtension: "/session", parameters: nil)
-            let _ = ParseClient.sharedInstance().taskForMethod(ParseClient.MethodTypes.post, withURL: urlForLoginWithUdacity, httpHeaderFieldValue: ["Accept":"application/json", "Content-Type":"application/json"], httpBody: "{\"udacity\": {\"username\": \"\(userName)\", \"password\": \"\(password)\"}}", completionHandlerForTask: {(data, error) in
+            let _ = ParseClient.sharedInstance().taskForMethod(ParseClient.MethodTypes.post, withURL: urlForLoginWithUdacity, httpHeaderFieldValue: [ParseClient.JSONHeaderField.accept:ParseClient.JSONHeaderValues.appJSON, ParseClient.JSONHeaderField.contentType:ParseClient.JSONHeaderValues.appJSON], httpBody: "{\"udacity\": {\"username\": \"\(userName)\", \"password\": \"\(password)\"}}", completionHandlerForTask: {(data, error) in
                 if error == nil {
                     print("SUCCESS!!! ==got session ID & user ID==")
                     let postSession = data as! [String:AnyObject]
@@ -49,6 +49,7 @@ extension ParseClient {
         }
     }
     
+    // Retrieve initial user information: first name and last name
     func getInitialUserInfo(completionHandlerForGetIserInfo: @escaping (_ success: Bool, _ error: NSError?) -> Void) -> Void {
         let urlForGetUserInfo = ParseClient.sharedInstance().makeURL(apiHost: ParseClient.Constants.UdacityApiHost, apiPath: ParseClient.Constants.UdacityApiPath, withExtension: "/users/\(ParseClient.sharedInstance().userID!)", parameters: nil)
         let _ = ParseClient.sharedInstance().taskForMethod(ParseClient.MethodTypes.get, withURL: urlForGetUserInfo, httpHeaderFieldValue: [:], httpBody: nil, completionHandlerForTask: {(data, error) in
@@ -71,4 +72,25 @@ extension ParseClient {
             
         })
     }
+    
+    // Get a full list of Student Locations
+    func getAllStudentLocations() -> Void {
+        
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 }
