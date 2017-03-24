@@ -84,7 +84,7 @@
         <!--Input-->
         <scene sceneID="ohX-v3-z3M">
             <objects>
-                <viewController id="Yh1-wR-mBE" userLabel="Input" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Input Controller" id="Yh1-wR-mBE" userLabel="Input" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="pmg-Ed-gsb"/>
                         <viewControllerLayoutGuide type="bottom" id="NWD-se-5Pb"/>
@@ -132,7 +132,7 @@
         <!--Place new Pin-->
         <scene sceneID="UaE-5u-l86">
             <objects>
-                <viewController id="e7i-fe-4oC" userLabel="Place new Pin" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Place NewPin Controller" id="e7i-fe-4oC" userLabel="Place new Pin" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="TvN-ge-RR0"/>
                         <viewControllerLayoutGuide type="bottom" id="c1b-ZS-LWx"/>
@@ -257,7 +257,7 @@
         <!--Navigation Manager-->
         <scene sceneID="nMj-wN-8Q9">
             <objects>
-                <navigationController id="Ter-DS-vdp" userLabel="Navigation Manager" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="Navigation Manager Controller" id="Ter-DS-vdp" userLabel="Navigation Manager" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="M08-8w-OeL">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>

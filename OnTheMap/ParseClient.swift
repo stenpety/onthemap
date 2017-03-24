@@ -12,7 +12,7 @@ class ParseClient: NSObject {
     
     // MARK: Properties
     var sessionID: String? = nil
-    
+    var studentLocations = [StudentLocation]()
     
     // MARK: Methods
     // Create a data task for any specified method
@@ -65,10 +65,10 @@ class ParseClient: NSObject {
             }
             
             // Serialize the returned data and transmit it to completion handler
-            var parsedData: AnyObject! = nil
+            var serializedData: AnyObject! = nil
             do {
-                parsedData = try JSONSerialization.jsonObject(with: returnedData, options: .allowFragments) as AnyObject
-                completionHandlerForTask(parsedData, nil)
+                serializedData = try JSONSerialization.jsonObject(with: returnedData, options: .allowFragments) as AnyObject
+                completionHandlerForTask(serializedData, nil)
             } catch {
                 sendError("Could not parse returned data")
                 return

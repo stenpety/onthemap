@@ -35,16 +35,22 @@ class LoginViewController: UIViewController {
                     let sessionInfo = postSession[ParseClient.UdacityResponseKeys.session] as! [String:AnyObject]
                     let sessionID = sessionInfo[ParseClient.UdacityResponseKeys.id] as! String
                     
-                    print("Session ID is: \(sessionID)")
+                    // Set client shared instance's property
+                    ParseClient.sharedInstance().sessionID = sessionID
+                    self.completeLogin()
                 } else {
-                    print("ERROR!!!")
+                    // Print any delivered error
+                    print(error as Any)
+                    return
                 }
-                
             })
         }
         
     }
     
+    private func completeLogin() {
+        // TODO: Instantiate and present Navigation controller
+    }
     
 }
 
