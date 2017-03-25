@@ -93,6 +93,6 @@ extension ParseClient {
     struct StoryBoardIdentifiers {
         static let listCellReuseIdentifier = "ListTableCell"
         static let navigationManagerController = "NavigationManagerController"
-        static let detailsNavigationController = "DetailsNavigationController"
+        static let locationDetailsController = "LocationDetailsController"
     }
 }

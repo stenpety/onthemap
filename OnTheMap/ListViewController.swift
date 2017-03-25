@@ -43,7 +43,10 @@ class ListViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // TODO: bring LocationDetail VC and show details
+        let locationDetailsViewControler = storyboard?.instantiateViewController(withIdentifier: ParseClient.StoryBoardIdentifiers.locationDetailsController) as! LocationDetailsViewController
+        locationDetailsViewControler.studentLocation = studentLocations[indexPath.row]
+        navigationController?.pushViewController(locationDetailsViewControler, animated: true)
+        //self.present(locationDetailsViewControler, animated: true, completion: nil)
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
