@@ -88,4 +88,9 @@ extension ParseClient {
         static let firstName = "first_name"
         static let lastName = "last_name"
     }
+    
+    // MARK: Auxiliary
+    struct AuxConstants {
+        static let listCellReuseIdentifier = "ListTableCell"
+    }
 }

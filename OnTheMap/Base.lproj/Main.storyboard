@@ -145,16 +145,16 @@
                                 <rect key="frame" x="16" y="28" width="343" height="631"/>
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter a link to share here" textAlignment="center" minimumFontSize="24" translatesAutoresizingMaskIntoConstraints="NO" id="KKC-mU-1Yh">
-                                        <rect key="frame" x="0.0" y="0.0" width="343" height="50"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="343" height="30.5"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="gpk-Kk-Ti6">
-                                        <rect key="frame" x="0.0" y="58" width="343" height="486"/>
+                                        <rect key="frame" x="0.0" y="38.5" width="343" height="542.5"/>
                                     </mapView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kgO-DW-uyC">
-                                        <rect key="frame" x="0.0" y="552" width="343" height="79"/>
+                                        <rect key="frame" x="0.0" y="589" width="343" height="42"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
                                         <state key="normal" title="Submit"/>
                                     </button>
@@ -177,7 +177,7 @@
         <!--List-->
         <scene sceneID="RdD-lZ-LWv">
             <objects>
-                <viewController id="j3q-6w-RlB" sceneMemberID="viewController">
+                <viewController id="j3q-6w-RlB" customClass="ListViewController" customModule="OnTheMap" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="L5I-Te-unN"/>
                         <viewControllerLayoutGuide type="bottom" id="QHX-B0-PHE"/>
@@ -189,6 +189,32 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="BBd-hT-vLK">
                                 <rect key="frame" x="16" y="72" width="343" height="538"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ListTableCell" textLabel="Gbc-0X-9Gp" detailTextLabel="xpV-VD-DmQ" style="IBUITableViewCellStyleSubtitle" id="TZd-Gm-Dua">
+                                        <rect key="frame" x="0.0" y="28" width="343" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="TZd-Gm-Dua" id="vUS-mN-beC">
+                                            <rect key="frame" x="0.0" y="0.0" width="343" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Gbc-0X-9Gp">
+                                                    <rect key="frame" x="15" y="4" width="34" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="xpV-VD-DmQ">
+                                                    <rect key="frame" x="15" y="25" width="44" height="15"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -200,6 +226,9 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="List" image="icon_listview-selected" id="GaL-bn-A5v"/>
+                    <connections>
+                        <outlet property="studentLocationsTable" destination="BBd-hT-vLK" id="Xm5-t1-Qva"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="myM-Od-eOJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -304,7 +333,7 @@
         <!--Map-->
         <scene sceneID="nfq-cf-w3q">
             <objects>
-                <viewController id="Mdl-V4-oJc" sceneMemberID="viewController">
+                <viewController id="Mdl-V4-oJc" customClass="MapViewController" customModule="OnTheMap" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="6vF-hc-zwy"/>
                         <viewControllerLayoutGuide type="bottom" id="kgC-Jb-DJc"/>
@@ -314,15 +343,15 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="p7e-eC-TnD">
-                                <rect key="frame" x="0.0" y="72" width="375" height="538"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                             </mapView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="p7e-eC-TnD" secondAttribute="trailing" constant="-16" id="1YZ-AO-9YN"/>
                             <constraint firstItem="p7e-eC-TnD" firstAttribute="leading" secondItem="PaA-UH-fPN" secondAttribute="leadingMargin" constant="-16" id="PGg-nN-XMP"/>
-                            <constraint firstItem="p7e-eC-TnD" firstAttribute="top" secondItem="6vF-hc-zwy" secondAttribute="bottom" constant="8" symbolic="YES" id="kB4-51-NKy"/>
-                            <constraint firstItem="kgC-Jb-DJc" firstAttribute="top" secondItem="p7e-eC-TnD" secondAttribute="bottom" constant="8" symbolic="YES" id="nLT-wl-dVD"/>
+                            <constraint firstItem="p7e-eC-TnD" firstAttribute="top" secondItem="6vF-hc-zwy" secondAttribute="bottom" id="kB4-51-NKy"/>
+                            <constraint firstItem="kgC-Jb-DJc" firstAttribute="top" secondItem="p7e-eC-TnD" secondAttribute="bottom" id="nLT-wl-dVD"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Map" image="icon_mapview-selected" id="fy1-Wl-fRD"/>

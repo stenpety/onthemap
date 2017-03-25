@@ -28,7 +28,6 @@ extension ParseClient {
                 return
             }
             
-            print("SUCCESS!!! ==got session ID & user ID==")
             let postSession = data as! [String:AnyObject]
             
             // Set client shared instance's property: sessionID
@@ -61,7 +60,6 @@ extension ParseClient {
                 completionHandlerForGetIserInfo(false, error)
                 return
             }
-            print("SUCCESS!!! ==got User Info==")
             let getUserData = data as! [String:AnyObject]
             
             // Set client shared instance's properties: user first & last names
