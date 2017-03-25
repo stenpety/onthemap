@@ -22,8 +22,16 @@ class TabManagerViewController: UITabBarController {
         // TODO: implement send request for new pin
     }
     
+    // Refresh button - common for Map and List
     @IBAction func refreshStudentLocations(_ sender: UIBarButtonItem) {
-        // TODO: implement refresh all
+        ParseClient.sharedInstance().getAllStudentLocations(completionHandlerForGetAllStudentLocations: {(success, error) in
+            if success {
+                print("Database updated. What next?")
+                ListViewController.sharedInstance().tableView.reloadData()
+            } else {
+                print(error!)
+            }
+        })
     }
     
     

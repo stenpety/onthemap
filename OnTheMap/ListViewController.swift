@@ -25,8 +25,8 @@ class ListViewController: UITableViewController {
         studentLocations = ParseClient.sharedInstance().studentLocations
         tableView.reloadData()
     }
-
-
+    
+    // MARK: TableView Delegate & Data Source functions
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return studentLocations.count
     }
@@ -48,5 +48,13 @@ class ListViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 50
+    }
+    
+    // MARK: TableViewVC singleton shared instance
+    class func sharedInstance () -> ListViewController {
+        struct Singleton {
+            static let sharedInstance = ListViewController()
+        }
+        return Singleton.sharedInstance
     }
 }
