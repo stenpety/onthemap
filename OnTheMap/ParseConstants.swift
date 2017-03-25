@@ -27,6 +27,7 @@ extension ParseClient {
         static let accept = "Accept"
         static let xParseREST = "X-Parse-REST-API-Key"
         static let xParseAppID = "X-Parse-Application-Id"
+        static let xsrfToken = "X-XSRF-TOKEN"
     }
     
     // JSON Header - Values
@@ -91,6 +92,7 @@ extension ParseClient {
     
     // MARK: StoryBoard identifiers
     struct StoryBoardIdentifiers {
+        static let loginViewController = "LoginViewController"
         static let listCellReuseIdentifier = "ListTableCell"
         static let navigationManagerController = "NavigationManagerController"
         static let locationDetailsController = "LocationDetailsController"

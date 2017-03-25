@@ -27,7 +27,10 @@ class TabManagerViewController: UITabBarController {
         ParseClient.sharedInstance().getAllStudentLocations(completionHandlerForGetAllStudentLocations: {(success, error) in
             if success {
                 print("Database updated. What next?")
-                ListViewController.sharedInstance().tableView.reloadData()
+                performUIUpdatesOnMain {
+                    ListViewController.sharedInstance().studentLocations = ParseClient.sharedInstance().studentLocations
+                    ListViewController.sharedInstance().tableView.reloadData()
+                }
             } else {
                 print(error!)
             }
@@ -36,7 +39,18 @@ class TabManagerViewController: UITabBarController {
     
     
     @IBAction func logOut(_ sender: UIBarButtonItem) {
-        // TODO: implement log out
+        ParseClient.sharedInstance().deleteSessionID(completionHandlerForDeleteSessionID: {(success, error) in
+            if success {
+                print("ID deleted")
+                performUIUpdatesOnMain {
+                    let loginViewController = self.storyboard!.instantiateViewController(withIdentifier: ParseClient.StoryBoardIdentifiers.loginViewController)
+                    self.present(loginViewController, animated: true, completion: nil)
+                }
+            } else {
+                print(error!)
+            }
+            
+        })
     }
     
     

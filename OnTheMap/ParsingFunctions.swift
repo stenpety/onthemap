@@ -102,6 +102,41 @@ extension ParseClient {
             })
     }
     
+    // Delete a session ID for log out
+    func deleteSessionID(completionHandlerForDeleteSessionID: @escaping (_ success: Bool, _ error: NSError?) -> Void) -> Void {
+        let urlForDeleteSessionID = ParseClient.sharedInstance().makeURL(apiHost: ParseClient.Constants.UdacityApiHost, apiPath: ParseClient.Constants.UdacityApiPath, withExtension: "/session", parameters: [:])
+        
+        var xsrfCookie: HTTPCookie? = nil
+        let sharedCookiesStorage = HTTPCookieStorage.shared
+        for cookie in sharedCookiesStorage.cookies! {
+            if cookie.name == "XSRF-TOKEN" {
+                xsrfCookie = cookie
+                print("Cookie FOUND")
+            }
+        }
+        
+        var headerParameters = [String:String]()
+        if let xsrfCookie  = xsrfCookie {
+            headerParameters[ParseClient.JSONHeaderField.xsrfToken] = xsrfCookie.value
+        }
+        
+        let _ = ParseClient.sharedInstance().taskForMethod(ParseClient.MethodTypes.delete, withURL: urlForDeleteSessionID, httpHeaderFieldValue: headerParameters, httpBody: nil, completionHandlerForTask: {(data, error) in
+            
+            guard error == nil else {
+                completionHandlerForDeleteSessionID(false, error)
+                return
+            }
+            
+            let postSession = data as! [String:AnyObject]
+            let sessionInfo = postSession[ParseClient.UdacityResponseKeys.session] as! [String:AnyObject]
+            if let sessionID = sessionInfo[ParseClient.UdacityResponseKeys.id] as? String {
+                print("DELETED: ", sessionID)
+                completionHandlerForDeleteSessionID(true, nil)
+            } else {
+                completionHandlerForDeleteSessionID(false, NSError(domain: "deleteSessionID", code: 1, userInfo: [NSLocalizedDescriptionKey:"Cannot delete session ID"]))
+            }
+        })
+    }
     
     
     
