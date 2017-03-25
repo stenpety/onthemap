@@ -8,10 +8,9 @@
 
 import UIKit
 
-class ListViewController: UIViewController {
+class ListViewController: UITableViewController {
     
     var studentLocations = [StudentLocation]()
-    @IBOutlet weak var studentLocationsTable: UITableView!
     
     // MARK: Life cycle
     override func viewDidLoad() {
@@ -24,19 +23,17 @@ class ListViewController: UIViewController {
         super.viewWillAppear(animated)
         
         studentLocations = ParseClient.sharedInstance().studentLocations
-        studentLocationsTable.reloadData()
+        tableView.reloadData()
         print("V will appear: ", studentLocations.count)
     }
-}
 
-extension ListViewController: UITableViewDelegate, UITableViewDataSource {
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         print("Delegate: ", studentLocations.count)
         return studentLocations.count
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // Get cell type
         let listCell = tableView.dequeueReusableCell(withIdentifier: ParseClient.AuxConstants.listCellReuseIdentifier) as UITableViewCell!
         
@@ -48,11 +45,11 @@ extension ListViewController: UITableViewDelegate, UITableViewDataSource {
         return listCell!
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // TODO: bring LocationDetail VC and show details
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 50
     }
 }
