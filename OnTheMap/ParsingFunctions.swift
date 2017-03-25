@@ -91,7 +91,6 @@ extension ParseClient {
             }
             
             print("I got to iterating through arrayOfLocations!")
-            print(arrayOfLocationDicts)
             for location in arrayOfLocationDicts {
                 do {
                     let studentLocation = try StudentLocation(location)
