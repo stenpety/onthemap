@@ -24,24 +24,21 @@ class ListViewController: UITableViewController {
         
         studentLocations = ParseClient.sharedInstance().studentLocations
         tableView.reloadData()
-        print("V will appear: ", studentLocations.count)
     }
 
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print("Delegate: ", studentLocations.count)
         return studentLocations.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // Get cell type
-        let listCell = tableView.dequeueReusableCell(withIdentifier: ParseClient.AuxConstants.listCellReuseIdentifier) as UITableViewCell!
+        let listCell = tableView.dequeueReusableCell(withIdentifier: ParseClient.StoryBoardIdentifiers.listCellReuseIdentifier) as UITableViewCell!
         
         // Setup cell
         listCell?.textLabel?.text = "\(studentLocations[indexPath.row].firstName) \(ParseClient.sharedInstance().studentLocations[indexPath.row].lastName)"
         listCell?.detailTextLabel?.text = "\(studentLocations[indexPath.row].mapString)"
         
-        print("Cell created")
         return listCell!
     }
     

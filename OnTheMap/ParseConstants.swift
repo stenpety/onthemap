@@ -89,8 +89,10 @@ extension ParseClient {
         static let lastName = "last_name"
     }
     
-    // MARK: Auxiliary
-    struct AuxConstants {
+    // MARK: StoryBoard identifiers
+    struct StoryBoardIdentifiers {
         static let listCellReuseIdentifier = "ListTableCell"
+        static let navigationManagerController = "NavigationManagerController"
+        static let detailsNavigationController = "DetailsNavigationController"
     }
 }
