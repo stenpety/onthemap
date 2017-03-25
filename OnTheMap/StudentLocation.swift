@@ -19,6 +19,8 @@ struct StudentLocation {
     var longitude: Double
     
     init(_ locationDictionary: [String:AnyObject]) throws {
+        
+        // Set the most important properties
         if let firstName = locationDictionary[ParseClient.ParseResponseKeys.firstName] as? String,
         let lastName = locationDictionary[ParseClient.ParseResponseKeys.lastName] as? String,
         let latitude = locationDictionary[ParseClient.ParseResponseKeys.latitude] as? Double,
@@ -31,6 +33,7 @@ struct StudentLocation {
             throw NSError(domain: "StudentLocation.init", code: 1, userInfo: [NSLocalizedDescriptionKey:"Could not initialize Student Location"])
         }
         
+        // Set less important properties, assign with empty string if not in parameter dictonary
         if let objectID = locationDictionary[ParseClient.ParseResponseKeys.objectID] as? String {
             self.objectID = objectID
         } else {

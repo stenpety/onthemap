@@ -16,6 +16,7 @@
 		1A4152971E82A1CD0089DB3F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A4152951E82A1CD0089DB3F /* Main.storyboard */; };
 		1A4152991E82A1CD0089DB3F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1A4152981E82A1CD0089DB3F /* Assets.xcassets */; };
 		1A41529C1E82A1CD0089DB3F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A41529A1E82A1CD0089DB3F /* LaunchScreen.storyboard */; };
+		1A63BDD11E866233007D95E8 /* GrandCentralDispatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A63BDD01E866233007D95E8 /* GrandCentralDispatch.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		1A4152981E82A1CD0089DB3F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1A41529B1E82A1CD0089DB3F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1A41529D1E82A1CD0089DB3F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1A63BDD01E866233007D95E8 /* GrandCentralDispatch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GrandCentralDispatch.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +92,7 @@
 			isa = PBXGroup;
 			children = (
 				1A4152911E82A1CD0089DB3F /* AppDelegate.swift */,
+				1A63BDD01E866233007D95E8 /* GrandCentralDispatch.swift */,
 				1A4152A51E82A40C0089DB3F /* Model */,
 				1A4152A41E82A3F60089DB3F /* ViewController */,
 				1A4152A31E82A1EC0089DB3F /* Assets */,
@@ -209,6 +212,7 @@
 				1A39B88E1E83C9EE00726ACB /* ParseClient.swift in Sources */,
 				1A4152941E82A1CD0089DB3F /* LoginViewController.swift in Sources */,
 				1A39B8921E83CC8400726ACB /* ParseConstants.swift in Sources */,
+				1A63BDD11E866233007D95E8 /* GrandCentralDispatch.swift in Sources */,
 				1A39B8941E851AFD00726ACB /* ParsingFunctions.swift in Sources */,
 				1A4152921E82A1CD0089DB3F /* AppDelegate.swift in Sources */,
 			);

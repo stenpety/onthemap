@@ -36,24 +36,26 @@ class LoginViewController: UIViewController {
                         ParseClient.sharedInstance().getAllStudentLocations(completionHandlerForGetAllStudentLocations: {(success, error) in
                             if success {
                                 print(ParseClient.sharedInstance().studentLocations.count)
+                                performUIUpdatesOnMain {
+                                    self.completeLogin()
+                                }
+                            } else {
+                                print(error!)
                             }
-                            // TODO: Handle error
                         })
                     } else {
-                        print("ERROR: ", error!)
+                        print(error!)
                     }
-                    
-                    
                 })
             } else {
-                print("ERROR: ", error!)
+                print(error!)
             }
         })
-        
     }
     
     private func completeLogin() {
-        // TODO: Instantiate and present Navigation controller
+        let navigationManagerController = storyboard!.instantiateViewController(withIdentifier: "Navigation Manager Controller") as! UINavigationController
+        self.present(navigationManagerController, animated: true, completion: nil)
     }
     
 }

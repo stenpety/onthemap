@@ -79,10 +79,8 @@ class ParseClient: NSObject {
                 sendError("Could not parse returned data")
                 return
             }
-            
         })
         task.resume()
-        
         return task
     }
     
@@ -100,7 +98,6 @@ class ParseClient: NSObject {
                 components.queryItems!.append(queryItem)
             }
         }
-        
         return components.url!
     }
     
@@ -111,5 +108,4 @@ class ParseClient: NSObject {
         }
         return Singleton.sharedInstance
     }
-    
 }
