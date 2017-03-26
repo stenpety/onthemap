@@ -146,16 +146,16 @@
                                 <rect key="frame" x="16" y="28" width="343" height="631"/>
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter a link to share here" textAlignment="center" minimumFontSize="24" translatesAutoresizingMaskIntoConstraints="NO" id="KKC-mU-1Yh">
-                                        <rect key="frame" x="0.0" y="0.0" width="343" height="33"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="343" height="30.5"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="gpk-Kk-Ti6">
-                                        <rect key="frame" x="0.0" y="41" width="343" height="535"/>
+                                        <rect key="frame" x="0.0" y="38.5" width="343" height="542.5"/>
                                     </mapView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kgO-DW-uyC">
-                                        <rect key="frame" x="0.0" y="584" width="343" height="47"/>
+                                        <rect key="frame" x="0.0" y="589" width="343" height="42"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
                                         <state key="normal" title="Submit"/>
                                     </button>
@@ -355,6 +355,9 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Map" image="icon_mapview-selected" id="fy1-Wl-fRD"/>
+                    <connections>
+                        <outlet property="studentLocationsMapView" destination="p7e-eC-TnD" id="fcc-40-olJ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iR6-Wd-55j" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
