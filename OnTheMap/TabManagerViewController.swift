@@ -53,6 +53,10 @@ class TabManagerViewController: UITabBarController {
         })
     }
     
+    @IBAction func addNewPin(_ sender: UIBarButtonItem) {
+        let addNewPinViewController = storyboard!.instantiateViewController(withIdentifier: ParseClient.StoryBoardIdentifiers.inputController) as! AddNewPinViewController
+        self.present(addNewPinViewController, animated: true, completion: nil)
+    }
     
     
 }

@@ -96,5 +96,7 @@ extension ParseClient {
         static let listCellReuseIdentifier = "ListTableCell"
         static let navigationManagerController = "NavigationManagerController"
         static let locationDetailsController = "LocationDetailsController"
+        static let inputController = "InputController"
+        static let placeNewPinController = "PlaceNewPinController"
     }
 }
