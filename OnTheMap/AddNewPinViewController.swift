@@ -25,6 +25,9 @@ class AddNewPinViewController: UIViewController {
     }
     
     @IBAction func findOnTheMap(_ sender: UIButton) {
+        // TODO: Temp function - for test only!
+        ParseClient.sharedInstance().postNewLocation(addNewPinVC: self, completionHandlerForPostNewLocation: {(success, error) in
+        })
     }
     
     

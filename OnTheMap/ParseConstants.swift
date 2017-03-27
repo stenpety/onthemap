@@ -58,7 +58,7 @@ extension ParseClient {
     }
     
     // MARK: Keys for request/response dictionaries
-    // Example: get-student-location.json
+    // Example: get-student-location.json, post-student-location.json
     struct ParseResponseKeys {
         static let results = "results"
         static let objectID = "objectID"
