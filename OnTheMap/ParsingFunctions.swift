@@ -140,14 +140,14 @@ extension ParseClient {
     
     // Post a new location
     // TODO: Implemented in TEST MODE
-    func postNewLocation(addNewPinVC: AddNewPinViewController, completionHandlerForPostNewLocation: @escaping (_ success: Bool, _ error: NSError?) -> Void) -> Void {
+    func postNewLocation(addNewPinVC: AddNewPinViewController, mapString: String, mediaURL: String, latitude:String, longitude: String, completionHandlerForPostNewLocation: @escaping (_ success: Bool, _ error: NSError?) -> Void) -> Void {
         
         let urlForPostNewLocation = ParseClient.sharedInstance().makeURL(apiHost: ParseClient.Constants.ParseApiHost, apiPath: ParseClient.Constants.ParseApiPath, withExtension: nil, parameters: nil)
         
         var headerParameters = ParseClient.JSONHeaderCommon.jsonHeaderCommonParse
         headerParameters[ParseClient.JSONHeaderField.contentType] = ParseClient.JSONHeaderValues.appJSON
         
-        let jsonBody = "{\"uniqueKey\": \"9876\", \"firstName\": \"\(ParseClient.sharedInstance().userFirstName!)\", \"lastName\": \"\(ParseClient.sharedInstance().userLastName!)\",\"mapString\": \"Baku, Azerbaijan\", \"mediaURL\": \"https://navalny.com\",\"latitude\": 40.375, \"longitude\": 49.8528}"
+        let jsonBody = "{\"uniqueKey\": \"\(ParseClient.Constants.petrSteninUdacityID)\", \"firstName\": \"\(ParseClient.sharedInstance().userFirstName!)\", \"lastName\": \"\(ParseClient.sharedInstance().userLastName!)\",\"mapString\": \"\(mapString)\", \"mediaURL\": \"\(mediaURL)\",\"latitude\": \(latitude), \"longitude\": \(longitude)}"
         
         let _ = ParseClient.sharedInstance().taskForMethod(ParseClient.MethodTypes.post, withURL: urlForPostNewLocation, httpHeaderFieldValue: headerParameters, httpBody: jsonBody, completionHandlerForTask: {(data, error) in
             

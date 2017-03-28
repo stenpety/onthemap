@@ -7,8 +7,15 @@
 //
 
 import UIKit
+import CoreLocation
 
-class AddNewPinViewController: UIViewController {
+class AddNewPinViewController: UIViewController, CLLocationManagerDelegate {
+    
+    // MARK: Properties
+    var userLatitude: String?
+    var userLongitude: String?
+    
+    let locationManager = CLLocationManager()
     
     // MARK: Outlets
     @IBOutlet weak var setNewLocationTextField: UITextField!
@@ -16,7 +23,13 @@ class AddNewPinViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        // Setup location manager
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestAlwaysAuthorization()
+        
+        CLLocationManager.locationServicesEnabled()
+        locationManager.startUpdatingLocation()
     }
     
     // MARK: Actions
@@ -26,13 +39,18 @@ class AddNewPinViewController: UIViewController {
     
     @IBAction func findOnTheMap(_ sender: UIButton) {
         // TODO: Temp function - for test only!
-        ParseClient.sharedInstance().postNewLocation(addNewPinVC: self, completionHandlerForPostNewLocation: {(success, error) in
+        ParseClient.sharedInstance().postNewLocation(addNewPinVC: self, mapString: "test Map string", mediaURL: "www.test.ru", latitude: userLatitude!, longitude: userLongitude!, completionHandlerForPostNewLocation: {(success, error) in
         })
     }
     
-    
-    
-    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let userLocation:CLLocation = locations[0] 
+        let lat = userLocation.coordinate.latitude
+        let long = userLocation.coordinate.longitude
+        
+        userLatitude = lat.description
+        userLongitude = long.description
+    }
     
     
 }

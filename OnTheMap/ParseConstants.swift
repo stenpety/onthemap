@@ -19,6 +19,8 @@ extension ParseClient {
         static let UdacityApiHost = "www.udacity.com"
         static let ParseApiPath = "/parse/classes/StudentLocation"
         static let UdacityApiPath = "/api"
+        
+        static let petrSteninUdacityID = "3523299535"
     }
     
     // JSON Header - Fields

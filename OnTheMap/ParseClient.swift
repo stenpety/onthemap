@@ -17,6 +17,8 @@ class ParseClient: NSObject {
     var userLastName: String? = nil
     var studentLocations = [StudentLocation]()
     
+    var myLocation: StudentLocation?
+    
     // MARK: Methods
     // Create a data task for any specified method
     func taskForMethod(_ method: MethodTypes, withURL url: URL, httpHeaderFieldValue httpHeader: [String:String], httpBody: String?, completionHandlerForTask: @escaping (_ result: AnyObject?, _ error: NSError?) throws -> Void ) -> URLSessionDataTask {
