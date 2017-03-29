@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1A001B5D1E883DE000A339B5 /* AddNewPinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A001B5C1E883DE000A339B5 /* AddNewPinViewController.swift */; };
+		1A160D141E8C3D3900623BC9 /* PlaceNewPinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A160D131E8C3D3900623BC9 /* PlaceNewPinViewController.swift */; };
 		1A39B88E1E83C9EE00726ACB /* ParseClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A39B88D1E83C9EE00726ACB /* ParseClient.swift */; };
 		1A39B8901E83CAB100726ACB /* StudentLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A39B88F1E83CAB100726ACB /* StudentLocation.swift */; };
 		1A39B8921E83CC8400726ACB /* ParseConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A39B8911E83CC8400726ACB /* ParseConstants.swift */; };
@@ -26,6 +27,7 @@
 
 /* Begin PBXFileReference section */
 		1A001B5C1E883DE000A339B5 /* AddNewPinViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddNewPinViewController.swift; sourceTree = "<group>"; };
+		1A160D131E8C3D3900623BC9 /* PlaceNewPinViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceNewPinViewController.swift; sourceTree = "<group>"; };
 		1A39B88D1E83C9EE00726ACB /* ParseClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseClient.swift; sourceTree = "<group>"; };
 		1A39B88F1E83CAB100726ACB /* StudentLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentLocation.swift; sourceTree = "<group>"; };
 		1A39B8911E83CC8400726ACB /* ParseConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseConstants.swift; sourceTree = "<group>"; };
@@ -130,6 +132,7 @@
 				1A63BDD41E866A9E007D95E8 /* ListViewController.swift */,
 				1A63BDD81E869FCA007D95E8 /* LocationDetailsViewController.swift */,
 				1A001B5C1E883DE000A339B5 /* AddNewPinViewController.swift */,
+				1A160D131E8C3D3900623BC9 /* PlaceNewPinViewController.swift */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -232,6 +235,7 @@
 				1A63BDD11E866233007D95E8 /* GrandCentralDispatch.swift in Sources */,
 				1A63BDD51E866A9E007D95E8 /* ListViewController.swift in Sources */,
 				1A39B8941E851AFD00726ACB /* ParsingFunctions.swift in Sources */,
+				1A160D141E8C3D3900623BC9 /* PlaceNewPinViewController.swift in Sources */,
 				1A001B5D1E883DE000A339B5 /* AddNewPinViewController.swift in Sources */,
 				1A4152921E82A1CD0089DB3F /* AppDelegate.swift in Sources */,
 				1A63BDD31E866930007D95E8 /* MapViewController.swift in Sources */,

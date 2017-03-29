@@ -67,9 +67,10 @@ extension ParseClient {
             if let userFirstName = userInfo[ParseClient.UdacityUserData.firstName] as? String, let userLastName = userInfo[ParseClient.UdacityUserData.lastName] as? String {
                 ParseClient.sharedInstance().userFirstName = userFirstName
                 ParseClient.sharedInstance().userLastName = userLastName
+                
                 completionHandlerForGetIserInfo(true, nil)
             } else {
-                completionHandlerForGetIserInfo(false, NSError(domain: "getInitialUserInfo", code: 1, userInfo: [NSLocalizedDescriptionKey:"Cannot retrieve user info: \(ParseClient.UdacityUserData.firstName), \(ParseClient.UdacityUserData.lastName)"]))
+                completionHandlerForGetIserInfo(false, NSError(domain: "getInitialUserInfo", code: 1, userInfo: [NSLocalizedDescriptionKey:"Cannot retrieve user info: first_name, last_name)"]))
             }
         })
     }
@@ -140,7 +141,7 @@ extension ParseClient {
     
     // Post a new location
     // TODO: Implemented in TEST MODE
-    func postNewLocation(addNewPinVC: AddNewPinViewController, mapString: String, mediaURL: String, latitude:String, longitude: String, completionHandlerForPostNewLocation: @escaping (_ success: Bool, _ error: NSError?) -> Void) -> Void {
+    func postNewLocation(mapString: String, mediaURL: String, latitude:String, longitude: String, completionHandlerForPostNewLocation: @escaping (_ success: Bool, _ error: NSError?) -> Void) -> Void {
         
         let urlForPostNewLocation = ParseClient.sharedInstance().makeURL(apiHost: ParseClient.Constants.ParseApiHost, apiPath: ParseClient.Constants.ParseApiPath, withExtension: nil, parameters: nil)
         

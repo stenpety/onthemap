@@ -13,11 +13,12 @@ class ParseClient: NSObject {
     // MARK: Properties
     var sessionID: String? = nil
     var userID: String? = nil
-    var userFirstName: String? = nil
-    var userLastName: String? = nil
+    
     var studentLocations = [StudentLocation]()
     
     var myLocation: StudentLocation?
+    var userFirstName: String?
+    var userLastName: String?
     
     // MARK: Methods
     // Create a data task for any specified method

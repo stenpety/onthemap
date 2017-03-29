@@ -39,7 +39,7 @@ class AddNewPinViewController: UIViewController, CLLocationManagerDelegate {
     
     @IBAction func findOnTheMap(_ sender: UIButton) {
         // TODO: Temp function - for test only!
-        ParseClient.sharedInstance().postNewLocation(addNewPinVC: self, mapString: "test Map string", mediaURL: "www.test.ru", latitude: userLatitude!, longitude: userLongitude!, completionHandlerForPostNewLocation: {(success, error) in
+        ParseClient.sharedInstance().postNewLocation(mapString: "test Map string", mediaURL: "www.test.ru", latitude: userLatitude!, longitude: userLongitude!, completionHandlerForPostNewLocation: {(success, error) in
         })
     }
     
