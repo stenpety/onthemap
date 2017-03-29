@@ -12,8 +12,8 @@ import CoreLocation
 class AddNewPinViewController: UIViewController, CLLocationManagerDelegate {
     
     // MARK: Properties
-    var userLatitude: String?
-    var userLongitude: String?
+    var userLatitude: Double?
+    var userLongitude: Double?
     
     let locationManager = CLLocationManager()
     
@@ -38,9 +38,21 @@ class AddNewPinViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     @IBAction func findOnTheMap(_ sender: UIButton) {
-        // TODO: Temp function - for test only!
-        ParseClient.sharedInstance().postNewLocation(mapString: "test Map string", mediaURL: "www.test.ru", latitude: userLatitude!, longitude: userLongitude!, completionHandlerForPostNewLocation: {(success, error) in
-        })
+        
+        if let mapString = setNewLocationTextField.text, mapString != "" {
+            // Init myLocation property of ParseClient with first/last name and coordinates
+            ParseClient.sharedInstance().myLocation = try! StudentLocation([ParseClient.ParseResponseKeys.firstName: ParseClient.sharedInstance().userFirstName! as AnyObject,
+                                                                            ParseClient.ParseResponseKeys.lastName: ParseClient.sharedInstance().userLastName! as AnyObject,
+                                                                            ParseClient.ParseResponseKeys.latitude:userLatitude! as AnyObject,
+                                                                            ParseClient.ParseResponseKeys.longitude:userLongitude! as AnyObject])
+            ParseClient.sharedInstance().myLocation?.mapString = mapString
+            ParseClient.sharedInstance().myLocation?.uniqueKey = ParseClient.Constants.petrSteninUdacityID
+            
+            let placeNewPinVC = storyboard!.instantiateViewController(withIdentifier: ParseClient.StoryBoardIdentifiers.placeNewPinController) as! PlaceNewPinViewController
+            self.present(placeNewPinVC, animated: true, completion: nil)
+        } else {
+            // TODO: Implement pop-up notification 'No text'
+        }
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -48,8 +60,10 @@ class AddNewPinViewController: UIViewController, CLLocationManagerDelegate {
         let lat = userLocation.coordinate.latitude
         let long = userLocation.coordinate.longitude
         
-        userLatitude = lat.description
-        userLongitude = long.description
+        
+        
+        userLatitude = lat
+        userLongitude = long
     }
     
     

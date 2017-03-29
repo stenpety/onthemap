@@ -25,9 +25,26 @@ class PlaceNewPinViewController: UIViewController {
     // MARK: Actions
     
     @IBAction func submitPostNewPin(_ sender: UIButton) {
+        if let mediaURL = mediaURLLabel.text, mediaURL != "" {
+            print("Trying to post .........")
+            let latString = String(describing: ParseClient.sharedInstance().myLocation!.latitude)
+            let longString = String(describing: ParseClient.sharedInstance().myLocation!.longitude)
+            
+            print("@@@ INPUT: ", (ParseClient.sharedInstance().myLocation?.mapString)!, mediaURL, latString, longString)
+            
+            ParseClient.sharedInstance().postNewLocation(mapString: (ParseClient.sharedInstance().myLocation?.mapString)!, mediaURL: mediaURL, latitude: latString, longitude: longString, completionHandlerForPostNewLocation: {(success, error) in
+                
+                if success {
+                    print("@@ new location placed @@")
+                    performUIUpdatesOnMain {
+                        self.dismiss(animated: true, completion: nil)
+                    }
+                } else {
+                    print("KOSYAK!")
+                }
+                })
         
-        
-        
+        }
     }
     
     @IBAction func cancelButtonPressed(_ sender: UIBarButtonItem) {
