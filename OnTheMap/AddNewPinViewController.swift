@@ -60,11 +60,15 @@ class AddNewPinViewController: UIViewController, CLLocationManagerDelegate {
         let lat = userLocation.coordinate.latitude
         let long = userLocation.coordinate.longitude
         
-        
-        
         userLatitude = lat
         userLongitude = long
     }
     
+    class func sharedInstance() -> AddNewPinViewController {
+        struct Singleton {
+            static let sharedInstance = AddNewPinViewController()
+        }
+        return Singleton.sharedInstance
+    }
     
 }

@@ -18,8 +18,16 @@ class PlaceNewPinViewController: UIViewController {
     // MARK: Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        let myLatitude = CLLocationDegrees(ParseClient.sharedInstance().myLocation!.latitude)
+        let myLongitude = CLLocationDegrees(ParseClient.sharedInstance().myLocation!.longitude)
+        
+        let myLocationAnnotation = MKPointAnnotation()
+        myLocationAnnotation.coordinate = CLLocationCoordinate2D(latitude: myLatitude, longitude: myLongitude)
+        myLocationAnnotation.title = "\(ParseClient.sharedInstance().myLocation!.firstName) \(ParseClient.sharedInstance().myLocation!.lastName)"
+        myLocationAnnotation.subtitle = "\(ParseClient.sharedInstance().myLocation!.mediaURL)"
+        
+        placeNewPinMapView.addAnnotation(myLocationAnnotation)
     }
     
     // MARK: Actions
@@ -33,7 +41,8 @@ class PlaceNewPinViewController: UIViewController {
                 
                 if success {
                     performUIUpdatesOnMain {
-                        self.dismiss(animated: true, completion: nil)
+                        let navigationManagerController = self.storyboard!.instantiateViewController(withIdentifier: ParseClient.StoryBoardIdentifiers.navigationManagerController) as! UINavigationController
+                        self.present(navigationManagerController, animated: true, completion: nil)
                     }
                 } else {
                     // TODO: Handle error
