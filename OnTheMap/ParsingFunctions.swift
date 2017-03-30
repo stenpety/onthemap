@@ -140,7 +140,6 @@ extension ParseClient {
     }
     
     // Post a new location
-    // TODO: Implemented in TEST MODE
     func postNewLocation(mapString: String, mediaURL: String, latitude:String, longitude: String, completionHandlerForPostNewLocation: @escaping (_ success: Bool, _ error: NSError?) -> Void) -> Void {
         
         let urlForPostNewLocation = ParseClient.sharedInstance().makeURL(apiHost: ParseClient.Constants.ParseApiHost, apiPath: ParseClient.Constants.ParseApiPath, withExtension: nil, parameters: nil)

@@ -63,7 +63,7 @@ extension ParseClient {
     // Example: get-student-location.json, post-student-location.json
     struct ParseResponseKeys {
         static let results = "results"
-        static let objectID = "objectID"
+        static let objectID = "objectId"
         static let uniqueKey = "uniqueKey"
         static let firstName = "firstName"
         static let lastName = "lastName"
