@@ -41,6 +41,13 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         }
         
         studentLocationsMapView.addAnnotations(annotations)
+        
+        // Center map on user's current location if it is set
+        if let myLocation = ParseClient.sharedInstance().myLocation {
+            let myCoordinates = CLLocationCoordinate2D(latitude: myLocation.latitude, longitude: myLocation.longitude)
+            let region = MKCoordinateRegionMakeWithDistance(myCoordinates, ParseClient.MapViewConstants.mapViewLargeScale, ParseClient.MapViewConstants.mapViewLargeScale)
+            studentLocationsMapView.setRegion(region, animated: true)
+        }
     }
     
     // MARK: Map VC singleton shared instance

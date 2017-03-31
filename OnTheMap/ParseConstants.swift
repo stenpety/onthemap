@@ -101,4 +101,10 @@ extension ParseClient {
         static let inputController = "InputController"
         static let placeNewPinController = "PlaceNewPinController"
     }
+    
+    // MARK: MapView constants
+    struct MapViewConstants {
+        static let mapViewFineScale: Double = 50000
+        static let mapViewLargeScale: Double = 500000
+    }
 }

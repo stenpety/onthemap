@@ -21,13 +21,22 @@ class PlaceNewPinViewController: UIViewController {
         
         let myLatitude = CLLocationDegrees(ParseClient.sharedInstance().myLocation!.latitude)
         let myLongitude = CLLocationDegrees(ParseClient.sharedInstance().myLocation!.longitude)
+        let myCoordinate = CLLocationCoordinate2D(latitude: myLatitude, longitude: myLongitude)
         
         let myLocationAnnotation = MKPointAnnotation()
-        myLocationAnnotation.coordinate = CLLocationCoordinate2D(latitude: myLatitude, longitude: myLongitude)
+        myLocationAnnotation.coordinate = myCoordinate
         myLocationAnnotation.title = "\(ParseClient.sharedInstance().myLocation!.firstName) \(ParseClient.sharedInstance().myLocation!.lastName)"
         myLocationAnnotation.subtitle = "\(ParseClient.sharedInstance().myLocation!.mediaURL)"
         
         placeNewPinMapView.addAnnotation(myLocationAnnotation)
+        
+        // Set mapView's region to match user's location
+        let region = MKCoordinateRegionMakeWithDistance(myCoordinate, ParseClient.MapViewConstants.mapViewFineScale, ParseClient.MapViewConstants.mapViewFineScale)
+        placeNewPinMapView.setRegion(region, animated: true)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
     }
     
     // MARK: Actions
