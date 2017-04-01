@@ -19,9 +19,19 @@ class TabManagerViewController: UITabBarController {
     // MARK: Actions
     // Launch VC to add a new pin
     @IBAction func addNewPin(_ sender: UIBarButtonItem) {
-        //let addNewPinViewController = storyboard!.instantiateViewController(withIdentifier: ParseClient.StoryBoardIdentifiers.inputController) as! AddNewPinViewController
-        let addNewPinNavigationViewController = storyboard!.instantiateViewController(withIdentifier: ParseClient.StoryBoardIdentifiers.navigationInputController) as! UINavigationController
-        self.present(addNewPinNavigationViewController, animated: true, completion: nil)
+        
+        if ParseClient.sharedInstance().locationExists {
+            let existAlert = UIAlertController(title: "Warning!", message: "Your location already exists. Do you want to overwrite it?", preferredStyle: .alert)
+            existAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+            existAlert.addAction(UIAlertAction(title: "Overwrite!", style: .destructive, handler: {control in
+                let addNewPinNavigationViewController = self.storyboard!.instantiateViewController(withIdentifier: ParseClient.StoryBoardIdentifiers.navigationInputController) as! UINavigationController
+                self.present(addNewPinNavigationViewController, animated: true, completion: nil)
+            }))
+            self.present(existAlert, animated: false, completion: nil)
+        } else {
+            let addNewPinNavigationViewController = storyboard!.instantiateViewController(withIdentifier: ParseClient.StoryBoardIdentifiers.navigationInputController) as! UINavigationController
+            self.present(addNewPinNavigationViewController, animated: true, completion: nil)
+        }
     }
     
     // Refresh button - common for Map and List

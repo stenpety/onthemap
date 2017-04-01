@@ -79,7 +79,6 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             for location in studentLocations {
                 if (location.latitude == view.annotation?.coordinate.latitude) && (location.longitude == view.annotation?.coordinate.longitude) {
                     selectedStudentLocation = location
-                    print("@@$$ FOUND!! $$@@")
                 }
             }
             locationDetailsViewController.studentLocation = selectedStudentLocation

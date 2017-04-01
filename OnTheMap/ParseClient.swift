@@ -20,6 +20,9 @@ class ParseClient: NSObject {
     var userFirstName: String?
     var userLastName: String?
     
+    // Flag to indicate that location exists. Default value is 'false'
+    var locationExists = false
+    
     // MARK: Methods
     // Create a data task for any specified method
     func taskForMethod(_ method: MethodTypes, withURL url: URL, httpHeaderFieldValue httpHeader: [String:String], httpBody: String?, completionHandlerForTask: @escaping (_ result: AnyObject?, _ error: NSError?) throws -> Void ) -> URLSessionDataTask {

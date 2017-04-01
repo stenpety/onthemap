@@ -46,6 +46,9 @@ class PlaceNewPinViewController: UIViewController {
             ParseClient.sharedInstance().postNewLocation(mapString: (ParseClient.sharedInstance().myLocation?.mapString)!, mediaURL: mediaURL, latitude: latString, longitude: longString, completionHandlerForPostNewLocation: {(success, error) in
                 
                 if success {
+                    // Indicates that location already exists
+                    ParseClient.sharedInstance().locationExists = true
+                    
                     performUIUpdatesOnMain {
                         // Get back to Intial view - Tab bar controller
                         let navigationManagerController = self.storyboard!.instantiateViewController(withIdentifier: ParseClient.StoryBoardIdentifiers.navigationManagerController) as! UINavigationController
