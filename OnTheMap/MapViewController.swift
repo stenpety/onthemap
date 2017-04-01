@@ -18,6 +18,13 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     @IBOutlet weak var studentLocationsMapView: MKMapView!
     
     // MARK: Life cycle
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        studentLocationsMapView.delegate = self
+    }
+    
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -47,6 +54,39 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         let region = MKCoordinateRegionMakeWithDistance(myCoordinates, ParseClient.MapViewConstants.mapViewLargeScale, ParseClient.MapViewConstants.mapViewLargeScale)
         studentLocationsMapView.setRegion(region, animated: true)
     }
+    
+    // MARK: MKMapViewDelegate functions
+    // Setup a location pin
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        var locationPinView = mapView.dequeueReusableAnnotationView(withIdentifier: ParseClient.MapViewConstants.pinReusableIdentifier)
+        
+        if locationPinView == nil {
+            locationPinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: ParseClient.MapViewConstants.pinReusableIdentifier)
+            locationPinView!.canShowCallout = true
+            locationPinView!.tintColor = .blue
+            locationPinView!.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
+        } else {
+            locationPinView!.annotation = annotation
+        }
+        return locationPinView
+    }
+    
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        if control == view.rightCalloutAccessoryView {
+            let locationDetailsViewController = storyboard!.instantiateViewController(withIdentifier: ParseClient.StoryBoardIdentifiers.locationDetailsController) as! LocationDetailsViewController
+            var selectedStudentLocation = studentLocations[0]
+            
+            for location in studentLocations {
+                if (location.latitude == view.annotation?.coordinate.latitude) && (location.longitude == view.annotation?.coordinate.longitude) {
+                    selectedStudentLocation = location
+                    print("@@$$ FOUND!! $$@@")
+                }
+            }
+            locationDetailsViewController.studentLocation = selectedStudentLocation
+            navigationController?.pushViewController(locationDetailsViewController, animated: true)
+        }
+    }
+    
     
     // MARK: Map VC singleton shared instance
     class func sharedInstance() -> MapViewController {

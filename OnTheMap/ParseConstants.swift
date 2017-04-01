@@ -110,6 +110,7 @@ extension ParseClient {
         static let mapViewLargeScale: Double = 500000
         static let defaultLatitude = -33.86785
         static let defaultLongitude = 151.20732
+        static let pinReusableIdentifier = "locationPin"
     }
     
     struct ListViewConstante {
