@@ -83,36 +83,23 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="O0q-oK-KCc">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <items>
-                                    <navigationItem id="r1H-B1-caE">
-                                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="nkn-jx-zZQ">
-                                            <connections>
-                                                <action selector="cancelButtonPressed:" destination="Yh1-wR-mBE" id="6db-40-uCv"/>
-                                            </connections>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="ixc-I2-wra">
-                                <rect key="frame" x="16" y="55" width="343" height="604"/>
+                                <rect key="frame" x="16" y="99" width="343" height="560"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Where are you studying today?" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NOQ-pT-ROb">
-                                        <rect key="frame" x="0.0" y="0.0" width="343" height="190.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="343" height="176"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="38"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Your location" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Wvg-RX-kX1">
-                                        <rect key="frame" x="0.0" y="206.5" width="343" height="191"/>
+                                        <rect key="frame" x="0.0" y="192" width="343" height="176"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2xw-RI-wbU">
-                                        <rect key="frame" x="0.0" y="413.5" width="343" height="190.5"/>
+                                        <rect key="frame" x="0.0" y="384" width="343" height="176"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
                                         <state key="normal" title="Find on the map"/>
                                         <connections>
@@ -130,13 +117,20 @@
                             <constraint firstAttribute="trailingMargin" secondItem="ixc-I2-wra" secondAttribute="trailing" id="kej-Pd-o8G"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="Age-Oo-0Ca">
+                        <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="NcW-AQ-cu0">
+                            <connections>
+                                <action selector="cancelButtonPressed:" destination="Yh1-wR-mBE" id="PHk-Nm-tnA"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="setNewLocationTextField" destination="Wvg-RX-kX1" id="jnL-C5-Zct"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KyN-7F-jxF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="278" y="908"/>
+            <point key="canvasLocation" x="278" y="904"/>
         </scene>
         <!--Place new Pin-->
         <scene sceneID="UaE-5u-l86">
@@ -150,19 +144,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mX5-nY-aCr">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <items>
-                                    <navigationItem id="d9D-EF-eSJ">
-                                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="EAp-Ox-5Ic">
-                                            <connections>
-                                                <action selector="cancelButtonPressed:" destination="e7i-fe-4oC" id="pNs-qa-7SD"/>
-                                            </connections>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="7nf-3c-8u9">
                                 <rect key="frame" x="16" y="55" width="343" height="604"/>
                                 <subviews>
@@ -201,7 +182,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zcg-fO-uxI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1004" y="907.1964017991005"/>
+            <point key="canvasLocation" x="1004" y="904"/>
         </scene>
         <!--List-->
         <scene sceneID="lbP-Dp-c9E">
@@ -246,7 +227,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uJG-3z-9oS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1958" y="493"/>
+            <point key="canvasLocation" x="1958" y="538"/>
         </scene>
         <!--Location Details-->
         <scene sceneID="BM1-vf-OUv">
@@ -443,6 +424,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="47q-1u-cAk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="279" y="134"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="F2o-zG-454">
+            <objects>
+                <navigationController storyboardIdentifier="NavigationInputController" automaticallyAdjustsScrollViewInsets="NO" id="GIM-JW-Nnh" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="e8a-2b-I9M">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Yh1-wR-mBE" kind="relationship" relationship="rootViewController" id="EtJ-4W-HHH"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="IZv-eu-b0W" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-463" y="905"/>
         </scene>
     </scenes>
     <resources>

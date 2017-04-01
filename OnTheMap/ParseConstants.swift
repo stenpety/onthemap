@@ -101,6 +101,7 @@ extension ParseClient {
         static let locationDetailsController = "LocationDetailsController"
         static let inputController = "InputController"
         static let placeNewPinController = "PlaceNewPinController"
+        static let navigationInputController = "NavigationInputController"
     }
     
     // MARK: View constants

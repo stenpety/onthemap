@@ -50,7 +50,7 @@ class AddNewPinViewController: UIViewController, CLLocationManagerDelegate {
             ParseClient.sharedInstance().myLocation?.uniqueKey = ParseClient.Constants.petrSteninUdacityID
             
             let placeNewPinVC = storyboard!.instantiateViewController(withIdentifier: ParseClient.StoryBoardIdentifiers.placeNewPinController) as! PlaceNewPinViewController
-            self.present(placeNewPinVC, animated: true, completion: nil)
+            navigationController?.pushViewController(placeNewPinVC, animated: true)
         } else {
             print("Print something there...")
             // TODO: Implement pop-up notification 'No text'

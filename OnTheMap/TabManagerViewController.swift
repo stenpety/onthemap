@@ -19,8 +19,9 @@ class TabManagerViewController: UITabBarController {
     // MARK: Actions
     // Launch VC to add a new pin
     @IBAction func addNewPin(_ sender: UIBarButtonItem) {
-        let addNewPinViewController = storyboard!.instantiateViewController(withIdentifier: ParseClient.StoryBoardIdentifiers.inputController) as! AddNewPinViewController
-        self.present(addNewPinViewController, animated: true, completion: nil)
+        //let addNewPinViewController = storyboard!.instantiateViewController(withIdentifier: ParseClient.StoryBoardIdentifiers.inputController) as! AddNewPinViewController
+        let addNewPinNavigationViewController = storyboard!.instantiateViewController(withIdentifier: ParseClient.StoryBoardIdentifiers.navigationInputController) as! UINavigationController
+        self.present(addNewPinNavigationViewController, animated: true, completion: nil)
     }
     
     // Refresh button - common for Map and List
