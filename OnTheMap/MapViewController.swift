@@ -91,7 +91,6 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         }
     }
     
-    
     // MARK: Map VC singleton shared instance
     class func sharedInstance() -> MapViewController {
         struct Singleton {
