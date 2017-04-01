@@ -115,7 +115,6 @@ extension ParseClient {
         for cookie in sharedCookiesStorage.cookies! {
             if cookie.name == "XSRF-TOKEN" {
                 xsrfCookie = cookie
-                print("Cookie FOUND")
             }
         }
         
@@ -160,8 +159,7 @@ extension ParseClient {
             }
             
             let sessionInfo = data as! [String:AnyObject]
-            if let objectID = sessionInfo[ParseClient.ParseResponseKeys.objectID] {
-                print("Location added, ID: ", objectID)
+            if let _ = sessionInfo[ParseClient.ParseResponseKeys.objectID] {
                 completionHandlerForPostNewLocation(true, nil)
             } else {
                 completionHandlerForPostNewLocation(false, NSError(domain: "postNewLocation", code: 1, userInfo: [NSLocalizedDescriptionKey:"Cannot post a new location"]))

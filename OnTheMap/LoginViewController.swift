@@ -31,20 +31,25 @@ class LoginViewController: UIViewController {
                     if success {
                         ParseClient.sharedInstance().getAllStudentLocations(completionHandlerForGetAllStudentLocations: {(success, error) in
                             if success {
-                                print("*** Login sucessful ***")
                                 performUIUpdatesOnMain {
                                     self.completeLogin()
                                 }
                             } else {
-                                print(error!)
+                                performUIUpdatesOnMain {
+                                    showAlert(viewController: self, title: ParseClient.ErrorStrings.error, message: error?.description, actionTitle: ParseClient.ErrorStrings.dismiss)
+                                }
                             }
                         })
                     } else {
-                        print(error!)
+                        performUIUpdatesOnMain {
+                            showAlert(viewController: self, title: ParseClient.ErrorStrings.error, message: error?.description, actionTitle: ParseClient.ErrorStrings.dismiss)
+                        }
                     }
                 })
             } else {
-                print(error!)
+                performUIUpdatesOnMain {
+                    showAlert(viewController: self, title: ParseClient.ErrorStrings.error, message: error?.description, actionTitle: ParseClient.ErrorStrings.dismiss)
+                }
             }
         })
     }

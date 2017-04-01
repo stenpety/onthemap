@@ -24,17 +24,11 @@ class LocationDetailsViewController: UIViewController {
     
     
     // MARK: Life cycle
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         guard let studentLocation = self.studentLocation else {
-            print("Error! No data loaded")
+            showAlert(viewController: self, title: ParseClient.ErrorStrings.error, message: "No data loaded".description, actionTitle: ParseClient.ErrorStrings.dismiss)
             return
         }
         

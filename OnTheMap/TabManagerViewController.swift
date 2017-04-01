@@ -28,14 +28,21 @@ class TabManagerViewController: UITabBarController {
     @IBAction func refreshStudentLocations(_ sender: UIBarButtonItem) {
         ParseClient.sharedInstance().getAllStudentLocations(completionHandlerForGetAllStudentLocations: {(success, error) in
             if success {
-                print("Database updated. What next?")
                 performUIUpdatesOnMain {
+                    // Confirm the update with AlertView
+                    showAlert(viewController: self, title: ParseClient.ErrorStrings.success, message: "Database updated", actionTitle: ParseClient.ErrorStrings.dismiss)
+                    
+                    // Update the table ('list') view
                     ListViewController.sharedInstance().studentLocations = ParseClient.sharedInstance().studentLocations
                     ListViewController.sharedInstance().tableView.reloadData()
+                    
                     // TODO: Refresh map view
+                    MapViewController.sharedInstance().studentLocations = ParseClient.sharedInstance().studentLocations
                 }
             } else {
-                print(error!)
+                performUIUpdatesOnMain {
+                    showAlert(viewController: self, title: ParseClient.ErrorStrings.error, message: error?.description, actionTitle: ParseClient.ErrorStrings.dismiss)
+                }
             }
         })
     }
@@ -49,7 +56,9 @@ class TabManagerViewController: UITabBarController {
                     self.present(loginViewController, animated: true, completion: nil)
                 }
             } else {
-                print(error!)
+                performUIUpdatesOnMain {
+                    showAlert(viewController: self, title: ParseClient.ErrorStrings.error, message: error?.description, actionTitle: ParseClient.ErrorStrings.dismiss)
+                }
             }
         })
     }

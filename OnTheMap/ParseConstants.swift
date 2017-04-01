@@ -108,9 +108,17 @@ extension ParseClient {
     struct MapViewConstants {
         static let mapViewFineScale: Double = 50000
         static let mapViewLargeScale: Double = 500000
+        static let defaultLatitude = -33.86785
+        static let defaultLongitude = 151.20732
     }
     
     struct ListViewConstante {
         static let tableDefaultHeight: CGFloat = 50
+    }
+    
+    struct ErrorStrings {
+        static let error = "ERROR"
+        static let dismiss = "Dismiss"
+        static let success = "SUCCESS"
     }
 }

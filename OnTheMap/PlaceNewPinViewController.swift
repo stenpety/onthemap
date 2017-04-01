@@ -47,19 +47,14 @@ class PlaceNewPinViewController: UIViewController {
                 
                 if success {
                     performUIUpdatesOnMain {
-                        // Get nack to Intial view - Tab bar controller
+                        // Get back to Intial view - Tab bar controller
                         let navigationManagerController = self.storyboard!.instantiateViewController(withIdentifier: ParseClient.StoryBoardIdentifiers.navigationManagerController) as! UINavigationController
                         self.present(navigationManagerController, animated: true, completion: nil)
                     }
                 } else {
-                    print(error!)
-                    // TODO: Handle error
+                    showAlert(viewController: self, title: ParseClient.ErrorStrings.error, message: error?.description, actionTitle: ParseClient.ErrorStrings.dismiss)
                 }
                 })
         }
-    }
-    
-    @IBAction func cancelButtonPressed(_ sender: UIBarButtonItem) {
-        self.dismiss(animated: true, completion: nil)
     }
 }

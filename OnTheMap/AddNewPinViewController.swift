@@ -52,12 +52,12 @@ class AddNewPinViewController: UIViewController, CLLocationManagerDelegate {
             let placeNewPinVC = storyboard!.instantiateViewController(withIdentifier: ParseClient.StoryBoardIdentifiers.placeNewPinController) as! PlaceNewPinViewController
             navigationController?.pushViewController(placeNewPinVC, animated: true)
         } else {
-            print("Print something there...")
-            // TODO: Implement pop-up notification 'No text'
+            showAlert(viewController: self, title: ParseClient.ErrorStrings.error, message: "Location name cannot be empty!", actionTitle: ParseClient.ErrorStrings.dismiss)
         }
     }
     
     // MARK: Location Manager Delegate Functions
+    // Get user's coordinates
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let userLocation:CLLocation = locations[0] 
         let lat = userLocation.coordinate.latitude

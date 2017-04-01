@@ -38,8 +38,9 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         }
         studentLocationsMapView.addAnnotations(annotations)
         
-        // Center map on user's current location if it is set, otherwise center at Greenwich (0,0)
-        var myCoordinates = CLLocationCoordinate2D(latitude: 0, longitude: 0)
+        // Center map on user's current location if it is set, otherwise center at Sydney
+        // Don't ask why Sydney =))
+        var myCoordinates = CLLocationCoordinate2D(latitude: ParseClient.MapViewConstants.defaultLatitude, longitude: ParseClient.MapViewConstants.defaultLongitude)
         if let myLocation = ParseClient.sharedInstance().myLocation {
             myCoordinates = CLLocationCoordinate2D(latitude: myLocation.latitude, longitude: myLocation.longitude)
         }
