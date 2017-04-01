@@ -34,6 +34,7 @@ class LocationDetailsViewController: UIViewController {
         super.viewWillAppear(animated)
         
         guard let studentLocation = self.studentLocation else {
+            print("Error! No data loaded")
             return
         }
         
@@ -44,5 +45,4 @@ class LocationDetailsViewController: UIViewController {
         longitudeLabel.text = "\(studentLocation.longitude)"
         mediaURLLabel.text = "\(studentLocation.mediaURL)"
     }
-    
 }

@@ -28,6 +28,7 @@ class AddNewPinViewController: UIViewController, CLLocationManagerDelegate {
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestAlwaysAuthorization()
         
+        // Start Location manager
         CLLocationManager.locationServicesEnabled()
         locationManager.startUpdatingLocation()
     }
@@ -51,10 +52,12 @@ class AddNewPinViewController: UIViewController, CLLocationManagerDelegate {
             let placeNewPinVC = storyboard!.instantiateViewController(withIdentifier: ParseClient.StoryBoardIdentifiers.placeNewPinController) as! PlaceNewPinViewController
             self.present(placeNewPinVC, animated: true, completion: nil)
         } else {
+            print("Print something there...")
             // TODO: Implement pop-up notification 'No text'
         }
     }
     
+    // MARK: Location Manager Delegate Functions
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let userLocation:CLLocation = locations[0] 
         let lat = userLocation.coordinate.latitude
@@ -64,11 +67,11 @@ class AddNewPinViewController: UIViewController, CLLocationManagerDelegate {
         userLongitude = long
     }
     
+    // MARK: Singleton shared instance
     class func sharedInstance() -> AddNewPinViewController {
         struct Singleton {
             static let sharedInstance = AddNewPinViewController()
         }
         return Singleton.sharedInstance
     }
-    
 }

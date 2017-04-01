@@ -19,10 +19,12 @@ class PlaceNewPinViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Get user's coordinated from the Model
         let myLatitude = CLLocationDegrees(ParseClient.sharedInstance().myLocation!.latitude)
         let myLongitude = CLLocationDegrees(ParseClient.sharedInstance().myLocation!.longitude)
         let myCoordinate = CLLocationCoordinate2D(latitude: myLatitude, longitude: myLongitude)
         
+        // Make Map annotation from Model data
         let myLocationAnnotation = MKPointAnnotation()
         myLocationAnnotation.coordinate = myCoordinate
         myLocationAnnotation.title = "\(ParseClient.sharedInstance().myLocation!.firstName) \(ParseClient.sharedInstance().myLocation!.lastName)"
@@ -35,12 +37,7 @@ class PlaceNewPinViewController: UIViewController {
         placeNewPinMapView.setRegion(region, animated: true)
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-    }
-    
     // MARK: Actions
-    
     @IBAction func submitPostNewPin(_ sender: UIButton) {
         if let mediaURL = mediaURLLabel.text, mediaURL != "" {
             let latString = String(describing: ParseClient.sharedInstance().myLocation!.latitude)
@@ -50,14 +47,15 @@ class PlaceNewPinViewController: UIViewController {
                 
                 if success {
                     performUIUpdatesOnMain {
+                        // Get nack to Intial view - Tab bar controller
                         let navigationManagerController = self.storyboard!.instantiateViewController(withIdentifier: ParseClient.StoryBoardIdentifiers.navigationManagerController) as! UINavigationController
                         self.present(navigationManagerController, animated: true, completion: nil)
                     }
                 } else {
+                    print(error!)
                     // TODO: Handle error
                 }
                 })
-        
         }
     }
     

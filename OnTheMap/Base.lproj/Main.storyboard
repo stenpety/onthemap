@@ -54,22 +54,11 @@
                                     </button>
                                 </subviews>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xqz-QQ-LNQ">
-                                <rect key="frame" x="16" y="623" width="343" height="36"/>
-                                <color key="backgroundColor" red="0.20000000000000001" green="0.0" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
-                                <state key="normal" title="Login with Facebook">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.59999999999999998" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="ime-hM-FtX" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="-30" id="E4V-im-z4W"/>
-                            <constraint firstItem="xqz-QQ-LNQ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="NIB-3A-ED0"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="xqz-QQ-LNQ" secondAttribute="trailing" id="Wjp-uE-WZS"/>
                             <constraint firstItem="ime-hM-FtX" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="cfk-Hw-BzK"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="xqz-QQ-LNQ" secondAttribute="bottom" constant="8" symbolic="YES" id="llr-J0-9iB"/>
                             <constraint firstAttribute="trailingMargin" secondItem="ime-hM-FtX" secondAttribute="trailing" id="zto-hH-t9D"/>
                         </constraints>
                     </view>

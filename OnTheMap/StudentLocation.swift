@@ -57,6 +57,5 @@ struct StudentLocation {
         } else {
             self.mediaURL = ""
         }
-        
     }
 }

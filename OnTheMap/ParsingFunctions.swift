@@ -11,10 +11,11 @@ import Foundation
 // Functions for extracting required data from serialized JSONs
 extension ParseClient {
     
+    // MARK: Get Session & User IDs
     // Send Request and retrieve Session ID & User ID
     func getSessionAndUserID(loginVC: LoginViewController, completionHandlerForLogin: @escaping (_ success: Bool, _ error: NSError?) -> Void) -> Void {
         
-        guard let userName = loginVC.loginTextField.text, let password = loginVC.passwordTextField.text else {
+        guard let userName = loginVC.loginTextField.text, let password = loginVC.passwordTextField.text, userName != "", password != "" else {
             completionHandlerForLogin(false, NSError(domain: "getSessionAndUserID", code: 1, userInfo: [NSLocalizedDescriptionKey:"Login and/or Password is empty"]))
             return
         }
@@ -51,6 +52,7 @@ extension ParseClient {
         })
     }
     
+    // MARK: Retrieve User Info
     // Retrieve initial user information: first name and last name
     func getInitialUserInfo(completionHandlerForGetIserInfo: @escaping (_ success: Bool, _ error: NSError?) -> Void) -> Void {
         let urlForGetUserInfo = ParseClient.sharedInstance().makeURL(apiHost: ParseClient.Constants.UdacityApiHost, apiPath: ParseClient.Constants.UdacityApiPath, withExtension: "/users/\(ParseClient.sharedInstance().userID!)", parameters: nil)
@@ -70,11 +72,12 @@ extension ParseClient {
                 
                 completionHandlerForGetIserInfo(true, nil)
             } else {
-                completionHandlerForGetIserInfo(false, NSError(domain: "getInitialUserInfo", code: 1, userInfo: [NSLocalizedDescriptionKey:"Cannot retrieve user info: first_name, last_name)"]))
+                completionHandlerForGetIserInfo(false, NSError(domain: "getInitialUserInfo", code: 1, userInfo: [NSLocalizedDescriptionKey:"Cannot retrieve user info: \(ParseClient.UdacityUserData.firstName), \(ParseClient.UdacityUserData.lastName))"]))
             }
         })
     }
     
+    // MARK: Get all Users locations
     // Get a full list of Student Locations
     func getAllStudentLocations(completionHandlerForGetAllStudentLocations: @escaping (_ success: Bool, _ error: NSError?) -> Void) -> Void {
         let urlForGetAllStudentLocations = ParseClient.sharedInstance().makeURL(apiHost: ParseClient.Constants.ParseApiHost, apiPath: ParseClient.Constants.ParseApiPath, withExtension: nil, parameters: nil)
@@ -96,14 +99,14 @@ extension ParseClient {
                     let studentLocation = try StudentLocation(location)
                     ParseClient.sharedInstance().studentLocations.append(studentLocation)
                 } catch {
-                    // TODO: launch completion handler with proper error
+                    completionHandlerForGetAllStudentLocations(false, NSError(domain: "StudentLocation.init", code: 1, userInfo: [NSLocalizedDescriptionKey:"Could not initialize Student Location"]))
                 }
             }
             completionHandlerForGetAllStudentLocations(true,nil)
             })
     }
     
-    // Delete a session ID for log out
+    // MARK: Delete a session ID (log out)
     func deleteSessionID(completionHandlerForDeleteSessionID: @escaping (_ success: Bool, _ error: NSError?) -> Void) -> Void {
         let urlForDeleteSessionID = ParseClient.sharedInstance().makeURL(apiHost: ParseClient.Constants.UdacityApiHost, apiPath: ParseClient.Constants.UdacityApiPath, withExtension: "/session", parameters: [:])
         
@@ -139,7 +142,7 @@ extension ParseClient {
         })
     }
     
-    // Post a new location
+    // MARK: Post a new location
     func postNewLocation(mapString: String, mediaURL: String, latitude:String, longitude: String, completionHandlerForPostNewLocation: @escaping (_ success: Bool, _ error: NSError?) -> Void) -> Void {
         
         let urlForPostNewLocation = ParseClient.sharedInstance().makeURL(apiHost: ParseClient.Constants.ParseApiHost, apiPath: ParseClient.Constants.ParseApiPath, withExtension: nil, parameters: nil)
@@ -164,6 +167,5 @@ extension ParseClient {
                 completionHandlerForPostNewLocation(false, NSError(domain: "postNewLocation", code: 1, userInfo: [NSLocalizedDescriptionKey:"Cannot post a new location"]))
             }
         })
-        
     }
 }

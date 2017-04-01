@@ -17,9 +17,10 @@ class TabManagerViewController: UITabBarController {
     }
     
     // MARK: Actions
-    
-    @IBAction func putNewPin(_ sender: UIBarButtonItem) {
-        // TODO: implement send request for new pin
+    // Launch VC to add a new pin
+    @IBAction func addNewPin(_ sender: UIBarButtonItem) {
+        let addNewPinViewController = storyboard!.instantiateViewController(withIdentifier: ParseClient.StoryBoardIdentifiers.inputController) as! AddNewPinViewController
+        self.present(addNewPinViewController, animated: true, completion: nil)
     }
     
     // Refresh button - common for Map and List
@@ -30,13 +31,13 @@ class TabManagerViewController: UITabBarController {
                 performUIUpdatesOnMain {
                     ListViewController.sharedInstance().studentLocations = ParseClient.sharedInstance().studentLocations
                     ListViewController.sharedInstance().tableView.reloadData()
+                    // TODO: Refresh map view
                 }
             } else {
                 print(error!)
             }
         })
     }
-    
     
     @IBAction func logOut(_ sender: UIBarButtonItem) {
         ParseClient.sharedInstance().deleteSessionID(completionHandlerForDeleteSessionID: {(success, error) in
@@ -49,14 +50,6 @@ class TabManagerViewController: UITabBarController {
             } else {
                 print(error!)
             }
-            
         })
     }
-    
-    @IBAction func addNewPin(_ sender: UIBarButtonItem) {
-        let addNewPinViewController = storyboard!.instantiateViewController(withIdentifier: ParseClient.StoryBoardIdentifiers.inputController) as! AddNewPinViewController
-        self.present(addNewPinViewController, animated: true, completion: nil)
-    }
-    
-    
 }

@@ -17,10 +17,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     // MARK: Outlets
     @IBOutlet weak var studentLocationsMapView: MKMapView!
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-    
+    // MARK: Life cycle
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -39,15 +36,15 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             
             annotations.append(studentLocationAnnotation)
         }
-        
         studentLocationsMapView.addAnnotations(annotations)
         
-        // Center map on user's current location if it is set
+        // Center map on user's current location if it is set, otherwise center at Greenwich (0,0)
+        var myCoordinates = CLLocationCoordinate2D(latitude: 0, longitude: 0)
         if let myLocation = ParseClient.sharedInstance().myLocation {
-            let myCoordinates = CLLocationCoordinate2D(latitude: myLocation.latitude, longitude: myLocation.longitude)
-            let region = MKCoordinateRegionMakeWithDistance(myCoordinates, ParseClient.MapViewConstants.mapViewLargeScale, ParseClient.MapViewConstants.mapViewLargeScale)
-            studentLocationsMapView.setRegion(region, animated: true)
+            myCoordinates = CLLocationCoordinate2D(latitude: myLocation.latitude, longitude: myLocation.longitude)
         }
+        let region = MKCoordinateRegionMakeWithDistance(myCoordinates, ParseClient.MapViewConstants.mapViewLargeScale, ParseClient.MapViewConstants.mapViewLargeScale)
+        studentLocationsMapView.setRegion(region, animated: true)
     }
     
     // MARK: Map VC singleton shared instance

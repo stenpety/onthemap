@@ -13,15 +13,10 @@ class ListViewController: UITableViewController {
     var studentLocations = [StudentLocation]()
     
     // MARK: Life cycle
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        // Get data from the Model and reload table
         studentLocations = ParseClient.sharedInstance().studentLocations
         tableView.reloadData()
     }
@@ -46,11 +41,10 @@ class ListViewController: UITableViewController {
         let locationDetailsViewControler = storyboard?.instantiateViewController(withIdentifier: ParseClient.StoryBoardIdentifiers.locationDetailsController) as! LocationDetailsViewController
         locationDetailsViewControler.studentLocation = studentLocations[indexPath.row]
         navigationController?.pushViewController(locationDetailsViewControler, animated: true)
-        //self.present(locationDetailsViewControler, animated: true, completion: nil)
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 50
+        return ParseClient.ListViewConstante.tableDefaultHeight
     }
     
     // MARK: TableViewVC singleton shared instance

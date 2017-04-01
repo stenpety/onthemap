@@ -53,6 +53,5 @@ class LoginViewController: UIViewController {
         let navigationManagerController = storyboard!.instantiateViewController(withIdentifier: ParseClient.StoryBoardIdentifiers.navigationManagerController) as! UINavigationController
         self.present(navigationManagerController, animated: true, completion: nil)
     }
-    
 }
 

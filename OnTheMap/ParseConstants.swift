@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 extension ParseClient {
     
@@ -102,9 +103,13 @@ extension ParseClient {
         static let placeNewPinController = "PlaceNewPinController"
     }
     
-    // MARK: MapView constants
+    // MARK: View constants
     struct MapViewConstants {
         static let mapViewFineScale: Double = 50000
         static let mapViewLargeScale: Double = 500000
+    }
+    
+    struct ListViewConstante {
+        static let tableDefaultHeight: CGFloat = 50
     }
 }
