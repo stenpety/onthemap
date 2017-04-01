@@ -73,15 +73,20 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         if control == view.rightCalloutAccessoryView {
-            let locationDetailsViewController = storyboard!.instantiateViewController(withIdentifier: ParseClient.StoryBoardIdentifiers.locationDetailsController) as! LocationDetailsViewController
-            var selectedStudentLocation = studentLocations[0]
             
+            // Fing out which StudentLocation is selected
+            var selectedStudentLocation: StudentLocation? = nil
             for location in studentLocations {
                 if (location.latitude == view.annotation?.coordinate.latitude) && (location.longitude == view.annotation?.coordinate.longitude) {
                     selectedStudentLocation = location
                 }
             }
-            locationDetailsViewController.studentLocation = selectedStudentLocation
+            
+            // Push details VC with data from selected location
+            let locationDetailsViewController = storyboard!.instantiateViewController(withIdentifier: ParseClient.StoryBoardIdentifiers.locationDetailsController) as! LocationDetailsViewController
+            if let selectedLocation = selectedStudentLocation {
+                locationDetailsViewController.studentLocation = selectedLocation
+            }
             navigationController?.pushViewController(locationDetailsViewController, animated: true)
         }
     }
