@@ -19,6 +19,7 @@ class ParseClient: NSObject {
     var myLocation: StudentLocation?
     var userFirstName: String?
     var userLastName: String?
+    var locationID: String?
     
     // Flag to indicate that location exists. Default value is 'false'
     var locationExists = false

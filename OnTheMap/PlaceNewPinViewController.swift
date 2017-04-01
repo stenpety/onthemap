@@ -39,14 +39,35 @@ class PlaceNewPinViewController: UIViewController {
     
     // MARK: Actions
     @IBAction func submitPostNewPin(_ sender: UIButton) {
-        if let mediaURL = mediaURLLabel.text, mediaURL != "" {
-            let latString = String(describing: ParseClient.sharedInstance().myLocation!.latitude)
-            let longString = String(describing: ParseClient.sharedInstance().myLocation!.longitude)
-            
+        guard let mediaURL = mediaURLLabel.text, mediaURL != "" else {
+            showAlert(viewController: self, title: ParseClient.ErrorStrings.error, message: "Media URL cannot be empty!", actionTitle: "Dismiss")
+            return
+        }
+        
+        let latString = String(describing: ParseClient.sharedInstance().myLocation!.latitude)
+        let longString = String(describing: ParseClient.sharedInstance().myLocation!.longitude)
+        
+        // Check whether location exists
+        if ParseClient.sharedInstance().locationExists {
+            ParseClient.sharedInstance().putNewLocation(locationIDToReplace: ParseClient.sharedInstance().locationID!, mapString: (ParseClient.sharedInstance().myLocation?.mapString)!, mediaURL: mediaURL, latitude: latString, longitude: longString, completionHandlerForPutNewLocation: {(success, error) in
+                
+                if success {
+                    performUIUpdatesOnMain {
+                        // Get back to Intial view - Tab bar controller
+                        let navigationManagerController = self.storyboard!.instantiateViewController(withIdentifier: ParseClient.StoryBoardIdentifiers.navigationManagerController) as! UINavigationController
+                        self.present(navigationManagerController, animated: true, completion: nil)
+                    }
+                } else {
+                    performUIUpdatesOnMain {
+                        showAlert(viewController: self, title: ParseClient.ErrorStrings.error, message: error?.description, actionTitle: ParseClient.ErrorStrings.dismiss)
+                    }
+                }
+                })
+        } else {
             ParseClient.sharedInstance().postNewLocation(mapString: (ParseClient.sharedInstance().myLocation?.mapString)!, mediaURL: mediaURL, latitude: latString, longitude: longString, completionHandlerForPostNewLocation: {(success, error) in
                 
                 if success {
-                    // Indicates that location already exists
+                    // Set flag to: location does exist
                     ParseClient.sharedInstance().locationExists = true
                     
                     performUIUpdatesOnMain {
@@ -55,9 +76,11 @@ class PlaceNewPinViewController: UIViewController {
                         self.present(navigationManagerController, animated: true, completion: nil)
                     }
                 } else {
-                    showAlert(viewController: self, title: ParseClient.ErrorStrings.error, message: error?.description, actionTitle: ParseClient.ErrorStrings.dismiss)
+                    performUIUpdatesOnMain {
+                        showAlert(viewController: self, title: ParseClient.ErrorStrings.error, message: error?.description, actionTitle: ParseClient.ErrorStrings.dismiss)
+                    }
                 }
-                })
+            })
         }
     }
 }

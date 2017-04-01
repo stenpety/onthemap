@@ -160,7 +160,7 @@ extension ParseClient {
             
             let sessionInfo = data as! [String:AnyObject]
             if let objectID = sessionInfo[ParseClient.ParseResponseKeys.objectID] {
-                ParseClient.sharedInstance().myLocation!.objectID = objectID as! String
+                ParseClient.sharedInstance().locationID = (objectID as! String)
                 completionHandlerForPostNewLocation(true, nil)
             } else {
                 completionHandlerForPostNewLocation(false, NSError(domain: "postNewLocation", code: 1, userInfo: [NSLocalizedDescriptionKey:"Cannot post a new location"]))
@@ -171,14 +171,14 @@ extension ParseClient {
     // MARK: Replace (put) existing location
     func putNewLocation(locationIDToReplace: String, mapString: String, mediaURL: String, latitude:String, longitude: String, completionHandlerForPutNewLocation: @escaping (_ success: Bool, _ error: NSError?) -> Void) -> Void {
         
-        let urlForPostNewLocation = ParseClient.sharedInstance().makeURL(apiHost: ParseClient.Constants.ParseApiHost, apiPath: ParseClient.Constants.ParseApiPath, withExtension: "/\(locationIDToReplace)", parameters: nil)
+        let urlForPutNewLocation = ParseClient.sharedInstance().makeURL(apiHost: ParseClient.Constants.ParseApiHost, apiPath: ParseClient.Constants.ParseApiPath, withExtension: "/\(locationIDToReplace)", parameters: nil)
         
         var headerParameters = ParseClient.JSONHeaderCommon.jsonHeaderCommonParse
         headerParameters[ParseClient.JSONHeaderField.contentType] = ParseClient.JSONHeaderValues.appJSON
         
         let jsonBody = "{\"uniqueKey\": \"\(ParseClient.Constants.petrSteninUdacityID)\", \"firstName\": \"\(ParseClient.sharedInstance().userFirstName!)\", \"lastName\": \"\(ParseClient.sharedInstance().userLastName!)\",\"mapString\": \"\(mapString)\", \"mediaURL\": \"\(mediaURL)\",\"latitude\": \(latitude), \"longitude\": \(longitude)}"
         
-        let _ = ParseClient.sharedInstance().taskForMethod(ParseClient.MethodTypes.put, withURL: urlForPostNewLocation, httpHeaderFieldValue: headerParameters, httpBody: jsonBody, completionHandlerForTask: {(data, error) in
+        let _ = ParseClient.sharedInstance().taskForMethod(ParseClient.MethodTypes.put, withURL: urlForPutNewLocation, httpHeaderFieldValue: headerParameters, httpBody: jsonBody, completionHandlerForTask: {(data, error) in
             
             guard error == nil else {
                 completionHandlerForPutNewLocation(false, error)
@@ -186,8 +186,7 @@ extension ParseClient {
             }
             
             let sessionInfo = data as! [String:AnyObject]
-            if let objectID = sessionInfo[ParseClient.ParseResponseKeys.objectID] {
-                ParseClient.sharedInstance().myLocation!.objectID = objectID as! String
+            if let _ = sessionInfo[ParseClient.ParseResponseKeys.updatedAt] {
                 completionHandlerForPutNewLocation(true, nil)
             } else {
                 completionHandlerForPutNewLocation(false, NSError(domain: "putNewLocation", code: 1, userInfo: [NSLocalizedDescriptionKey:"Cannot replace an existing location"]))
