@@ -21,6 +21,13 @@ extension ParseClient {
         static let ParseApiPath = "/parse/classes/StudentLocation"
         static let UdacityApiPath = "/api"
         
+        // Optional parameters for getting the list of locations:
+        // Limit (default = 100)
+        static let ParseAPILimit = "limit"
+        static let LimitLocations = 100
+        // Order
+        static let ParseAPIOrder = "order"
+        
         static let petrSteninUdacityID = "3523299535"
     }
     

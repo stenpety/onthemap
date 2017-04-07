@@ -98,6 +98,7 @@ class ParseClient: NSObject {
         components.scheme = Constants.ApiScheme
         components.host = apiHost
         components.path = apiPath + (pathExtension ?? "")
+        components.queryItems = [URLQueryItem]()
         
         if let parameters = parameters {
             for (key, value) in parameters {
