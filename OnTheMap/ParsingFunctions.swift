@@ -82,8 +82,8 @@ extension ParseClient {
     func getAllStudentLocations(completionHandlerForGetAllStudentLocations: @escaping (_ success: Bool, _ error: NSError?) -> Void) -> Void {
         
         // Extensions for URL: limit & order
-        //let urlForGetAllStudentLocations = ParseClient.sharedInstance().makeURL(apiHost: ParseClient.Constants.ParseApiHost, apiPath: ParseClient.Constants.ParseApiPath, withExtension: nil, parameters: [ParseClient.Constants.ParseAPILimit:String(ParseClient.Constants.LimitLocations), ParseClient.Constants.ParseAPIOrder: "-\(ParseClient.ParseResponseKeys.updatedAt)"])
-        let urlForGetAllStudentLocations = ParseClient.sharedInstance().makeURL(apiHost: ParseClient.Constants.ParseApiHost, apiPath: ParseClient.Constants.ParseApiPath, withExtension: nil, parameters: nil)
+        let urlForGetAllStudentLocations = ParseClient.sharedInstance().makeURL(apiHost: ParseClient.Constants.ParseApiHost, apiPath: ParseClient.Constants.ParseApiPath, withExtension: nil, parameters: [ParseClient.Constants.ParseAPILimit:String(ParseClient.Constants.LimitLocations), ParseClient.Constants.ParseAPIOrder: "-\(ParseClient.ParseResponseKeys.updatedAt)"])
+        //let urlForGetAllStudentLocations = ParseClient.sharedInstance().makeURL(apiHost: ParseClient.Constants.ParseApiHost, apiPath: ParseClient.Constants.ParseApiPath, withExtension: nil, parameters: nil)
         
         let _ = ParseClient.sharedInstance().taskForMethod(ParseClient.MethodTypes.get, withURL: urlForGetAllStudentLocations, httpHeaderFieldValue: ParseClient.JSONHeaderCommon.jsonHeaderCommonParse, httpBody: nil, completionHandlerForTask: {(data, error) in
             
@@ -99,10 +99,13 @@ extension ParseClient {
             }
             
             for location in arrayOfLocationDicts {
+                
                 do {
                     let studentLocation = try StudentLocation(location)
                     ParseClient.sharedInstance().studentLocations.append(studentLocation)
+                    print("@@ GOOD location:", location)
                 } catch {
+                    print("@@ BAD location:", location)
                     completionHandlerForGetAllStudentLocations(false, NSError(domain: "getAllStudentsLocations", code: 1, userInfo: [NSLocalizedDescriptionKey:"Could not initialize Student Location"]))
                 }
             }
