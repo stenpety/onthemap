@@ -16,9 +16,12 @@ class LoginViewController: UIViewController {
     
     
     // MARK: Life cycle
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // Reset login-password fields
+        loginTextField.text = nil
+        passwordTextField.text = nil
     }
     
     // MARK: Actions

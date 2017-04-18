@@ -62,8 +62,7 @@ class TabManagerViewController: UITabBarController {
             if success {
                 print("ID deleted")
                 performUIUpdatesOnMain {
-                    let loginViewController = self.storyboard!.instantiateViewController(withIdentifier: ParseClient.StoryBoardIdentifiers.loginViewController)
-                    self.present(loginViewController, animated: true, completion: nil)
+                    self.dismiss(animated: true, completion: nil)
                 }
             } else {
                 performUIUpdatesOnMain {

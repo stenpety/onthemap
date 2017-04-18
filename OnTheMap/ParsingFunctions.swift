@@ -98,16 +98,14 @@ extension ParseClient {
                 return
             }
             
+            // 'location' in the next iteration is either a valid location record (dict [String:AnyObject]) or invalid one
             for location in arrayOfLocationDicts {
                 
-                do {
-                    let studentLocation = try StudentLocation(location)
+                // If failable init succeed then append location to the main array
+                if let studentLocation = StudentLocation(location) {
                     ParseClient.sharedInstance().studentLocations.append(studentLocation)
-                    print("@@ GOOD location:", location)
-                } catch {
-                    print("@@ BAD location:", location)
-                    completionHandlerForGetAllStudentLocations(false, NSError(domain: "getAllStudentsLocations", code: 1, userInfo: [NSLocalizedDescriptionKey:"Could not initialize Student Location"]))
                 }
+            
             }
             completionHandlerForGetAllStudentLocations(true,nil)
             })

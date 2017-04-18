@@ -18,19 +18,22 @@ struct StudentLocation {
     var latitude: Double
     var longitude: Double
     
-    init(_ locationDictionary: [String:AnyObject]) throws {
+    // Failable initializer - returns nil if any of key properties is NOT set
+    init?(_ locationDictionary: [String:AnyObject]) {
         
-        // Set the most important properties
+        // Check & Set the most important properties
         if let firstName = locationDictionary[ParseClient.ParseResponseKeys.firstName] as? String,
         let lastName = locationDictionary[ParseClient.ParseResponseKeys.lastName] as? String,
         let latitude = locationDictionary[ParseClient.ParseResponseKeys.latitude] as? Double,
-            let longitude = locationDictionary[ParseClient.ParseResponseKeys.longitude] as? Double {
+        let longitude = locationDictionary[ParseClient.ParseResponseKeys.longitude] as? Double,
+        let mediaURL = locationDictionary[ParseClient.ParseResponseKeys.mediaURL] as? String {
             self.firstName = firstName
             self.lastName = lastName
             self.latitude = latitude
             self.longitude = longitude
+            self.mediaURL = mediaURL
         } else {
-            throw NSError(domain: "StudentLocation.init", code: 1, userInfo: [NSLocalizedDescriptionKey:"Could not initialize Student Location"])
+            return nil
         }
         
         // Set less important properties, assign with empty string if not in parameter dictonary
@@ -50,12 +53,6 @@ struct StudentLocation {
             self.mapString = mapString
         } else {
             self.mapString = ""
-        }
-        
-        if let mediaURL = locationDictionary[ParseClient.ParseResponseKeys.mediaURL] as? String {
-            self.mediaURL = mediaURL
-        } else {
-            self.mediaURL = ""
         }
     }
 }
