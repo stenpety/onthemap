@@ -105,7 +105,6 @@ extension ParseClient {
         static let loginViewController = "LoginViewController"
         static let listCellReuseIdentifier = "ListTableCell"
         static let navigationManagerController = "NavigationManagerController"
-        static let locationDetailsController = "LocationDetailsController"
         static let inputController = "InputController"
         static let placeNewPinController = "PlaceNewPinController"
         static let navigationInputController = "NavigationInputController"
@@ -124,6 +123,7 @@ extension ParseClient {
         static let tableDefaultHeight: CGFloat = 50
     }
     
+    // MARK: Strings to be displayed in Error alerts
     struct ErrorStrings {
         static let error = "ERROR"
         static let dismiss = "Dismiss"

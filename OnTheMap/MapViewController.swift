@@ -79,15 +79,21 @@ class MapViewController: UIViewController, MKMapViewDelegate {
                 }
             }
             
-            // Push details VC with data from selected location
-            // TODO: Replace 'details VC' with WebView
-            let locationDetailsViewController = storyboard!.instantiateViewController(withIdentifier: ParseClient.StoryBoardIdentifiers.locationDetailsController) as! LocationDetailsViewController
-            if let selectedLocation = selectedStudentLocation {
-                locationDetailsViewController.studentLocation = selectedLocation
+            // Ensure that a selected location is found, show an alert otherwise
+            guard let selectedLocation = selectedStudentLocation else {
+                showAlert(viewController: self, title: ParseClient.ErrorStrings.error, message: "BAD location!", actionTitle: ParseClient.ErrorStrings.dismiss)
+                return
             }
-            navigationController?.pushViewController(locationDetailsViewController, animated: true)
+            
+            if let mediaURL = URL(string: selectedLocation.mediaURL) {
+                UIApplication.shared.open(mediaURL, options: [:], completionHandler: nil)
+            } else {
+                showAlert(viewController: self, title: ParseClient.ErrorStrings.error, message: "This student location contains no valid URL to display", actionTitle: ParseClient.ErrorStrings.dismiss)
+            }
         }
     }
+    
+    //TODO: Do I really need shared instance of this VC?
     
 //    // MARK: Map VC singleton shared instance
 //    class func sharedInstance() -> MapViewController {

@@ -34,11 +34,14 @@ class ListViewController: UITableViewController {
         return listCell!
     }
     
-    // TODO: Replace DetailVC with WebView
+    // Open the associated link (mediaURL) in a Default Browser
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let locationDetailsViewControler = storyboard?.instantiateViewController(withIdentifier: ParseClient.StoryBoardIdentifiers.locationDetailsController) as! LocationDetailsViewController
-        locationDetailsViewControler.studentLocation = ParseClient.sharedInstance().studentLocations[indexPath.row]
-        navigationController?.pushViewController(locationDetailsViewControler, animated: true)
+        
+        if let mediaURL = URL(string: ParseClient.sharedInstance().studentLocations[indexPath.row].mediaURL) {
+            UIApplication.shared.open(mediaURL, options: [:], completionHandler: nil)
+        } else {
+            showAlert(viewController: self, title: ParseClient.ErrorStrings.error, message: "This student location contains no valid URL to display", actionTitle: ParseClient.ErrorStrings.dismiss)
+        }
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
