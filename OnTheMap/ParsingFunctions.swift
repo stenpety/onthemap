@@ -67,8 +67,16 @@ extension ParseClient {
             // Set client shared instance's properties: user first & last names
             let userInfo = getUserData[ParseClient.UdacityUserData.user] as! [String:AnyObject]
             if let userFirstName = userInfo[ParseClient.UdacityUserData.firstName] as? String, let userLastName = userInfo[ParseClient.UdacityUserData.lastName] as? String {
-                ParseClient.sharedInstance().userFirstName = userFirstName
-                ParseClient.sharedInstance().userLastName = userLastName
+                
+                // Make parameteres dictionary. Set lat/long to defaults (will be changed at the next scene)
+                let parametersForMyLocation = [ParseClient.ParseResponseKeys.firstName:userFirstName,
+                                               ParseClient.ParseResponseKeys.lastName:userLastName,
+                                               ParseClient.ParseResponseKeys.latitude:ParseClient.MapViewConstants.defaultLatitude,
+                                               ParseClient.ParseResponseKeys.longitude:ParseClient.MapViewConstants.defaultLongitude,
+                                               ParseClient.ParseResponseKeys.mediaURL:ParseClient.MapViewConstants.defaultMediaURL] as [String:AnyObject]
+                
+                // Init Model's 'myLocation' property
+                ParseClient.sharedInstance().myLocation = StudentLocation(parametersForMyLocation)
                 
                 completionHandlerForGetIserInfo(true, nil)
             } else {

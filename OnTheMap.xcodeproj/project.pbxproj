@@ -22,7 +22,6 @@
 		1A63BDD31E866930007D95E8 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A63BDD21E866930007D95E8 /* MapViewController.swift */; };
 		1A63BDD51E866A9E007D95E8 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A63BDD41E866A9E007D95E8 /* ListViewController.swift */; };
 		1A63BDD71E8699C7007D95E8 /* TabManagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A63BDD61E8699C7007D95E8 /* TabManagerViewController.swift */; };
-		1A63BDD91E869FCA007D95E8 /* LocationDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A63BDD81E869FCA007D95E8 /* LocationDetailsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,7 +42,6 @@
 		1A63BDD21E866930007D95E8 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		1A63BDD41E866A9E007D95E8 /* ListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		1A63BDD61E8699C7007D95E8 /* TabManagerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabManagerViewController.swift; sourceTree = "<group>"; };
-		1A63BDD81E869FCA007D95E8 /* LocationDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationDetailsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,7 +128,6 @@
 				1A63BDD61E8699C7007D95E8 /* TabManagerViewController.swift */,
 				1A63BDD21E866930007D95E8 /* MapViewController.swift */,
 				1A63BDD41E866A9E007D95E8 /* ListViewController.swift */,
-				1A63BDD81E869FCA007D95E8 /* LocationDetailsViewController.swift */,
 				1A001B5C1E883DE000A339B5 /* AddNewPinViewController.swift */,
 				1A160D131E8C3D3900623BC9 /* PlaceNewPinViewController.swift */,
 			);
@@ -229,7 +226,6 @@
 				1A63BDD71E8699C7007D95E8 /* TabManagerViewController.swift in Sources */,
 				1A39B8901E83CAB100726ACB /* StudentLocation.swift in Sources */,
 				1A39B88E1E83C9EE00726ACB /* ParseClient.swift in Sources */,
-				1A63BDD91E869FCA007D95E8 /* LocationDetailsViewController.swift in Sources */,
 				1A4152941E82A1CD0089DB3F /* LoginViewController.swift in Sources */,
 				1A39B8921E83CC8400726ACB /* ParseConstants.swift in Sources */,
 				1A63BDD11E866233007D95E8 /* GlobalFunctions.swift in Sources */,

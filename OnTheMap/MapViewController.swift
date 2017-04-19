@@ -9,7 +9,10 @@
 import UIKit
 import MapKit
 
-class MapViewController: UIViewController, MKMapViewDelegate {
+class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
+    
+    // MARK: properties
+    let locationManager = CLLocationManager()
     
     // MARK: Outlets
     @IBOutlet weak var studentLocationsMapView: MKMapView!
@@ -19,6 +22,15 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         super.viewDidLoad()
         
         studentLocationsMapView.delegate = self
+        
+        // Setup location manager
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestAlwaysAuthorization()
+        
+        // Start Location manager
+        CLLocationManager.locationServicesEnabled()
+        locationManager.startUpdatingLocation()
     }
     
     
@@ -91,6 +103,14 @@ class MapViewController: UIViewController, MKMapViewDelegate {
                 showAlert(viewController: self, title: ParseClient.ErrorStrings.error, message: "This student location contains no valid URL to display", actionTitle: ParseClient.ErrorStrings.dismiss)
             }
         }
+    }
+    
+    // MARK: Location Manager Delegate Functions
+    // Get user's coordinates and update Model's properties
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let userLocation:CLLocation = locations[0]
+        ParseClient.sharedInstance().myLocation?.latitude = userLocation.coordinate.latitude
+        ParseClient.sharedInstance().myLocation?.longitude = userLocation.coordinate.longitude
     }
     
     //TODO: Do I really need shared instance of this VC?
