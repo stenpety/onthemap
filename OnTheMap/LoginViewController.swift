@@ -7,8 +7,12 @@
 //
 
 import UIKit
+import MapKit
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, CLLocationManagerDelegate {
+    
+    // MARK: properties
+    let locationManager = CLLocationManager()
     
     // MARK: Outlets
     @IBOutlet weak var loginTextField: UITextField!
@@ -16,6 +20,19 @@ class LoginViewController: UIViewController {
     
     
     // MARK: Life cycle
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        // Setup location manager
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestAlwaysAuthorization()
+        
+        // Start Location manager
+        CLLocationManager.locationServicesEnabled()
+        locationManager.startUpdatingLocation()
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -60,6 +77,14 @@ class LoginViewController: UIViewController {
     private func completeLogin() {
         let navigationManagerController = storyboard!.instantiateViewController(withIdentifier: ParseClient.StoryBoardIdentifiers.navigationManagerController) as! UINavigationController
         self.present(navigationManagerController, animated: true, completion: nil)
+    }
+    
+    // MARK: Location Manager Delegate Functions
+    // Get user's coordinates and update Model's properties
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let userLocation:CLLocation = locations[0]
+        ParseClient.sharedInstance().myLocation?.latitude = userLocation.coordinate.latitude
+        ParseClient.sharedInstance().myLocation?.longitude = userLocation.coordinate.longitude
     }
 }
 

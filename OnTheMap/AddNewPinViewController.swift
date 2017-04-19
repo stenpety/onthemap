@@ -9,29 +9,14 @@
 import UIKit
 import CoreLocation
 
-class AddNewPinViewController: UIViewController, CLLocationManagerDelegate {
+class AddNewPinViewController: UIViewController {
     
     // MARK: Properties
     var userLatitude: Double?
     var userLongitude: Double?
     
-    let locationManager = CLLocationManager()
-    
     // MARK: Outlets
     @IBOutlet weak var setNewLocationTextField: UITextField!
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Setup location manager
-        locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.requestAlwaysAuthorization()
-        
-        // Start Location manager
-        CLLocationManager.locationServicesEnabled()
-        locationManager.startUpdatingLocation()
-    }
     
     // MARK: Actions
     @IBAction func cancelButtonPressed(_ sender: UIBarButtonItem) {
@@ -54,17 +39,6 @@ class AddNewPinViewController: UIViewController, CLLocationManagerDelegate {
         } else {
             showAlert(viewController: self, title: ParseClient.ErrorStrings.error, message: "Location name cannot be empty!", actionTitle: ParseClient.ErrorStrings.dismiss)
         }
-    }
-    
-    // MARK: Location Manager Delegate Functions
-    // Get user's coordinates
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        let userLocation:CLLocation = locations[0] 
-        let lat = userLocation.coordinate.latitude
-        let long = userLocation.coordinate.longitude
-        
-        userLatitude = lat
-        userLongitude = long
     }
     
     // MARK: Singleton shared instance
