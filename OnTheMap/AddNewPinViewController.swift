@@ -42,7 +42,7 @@ class AddNewPinViewController: UIViewController, CLLocationManagerDelegate {
         
         if let mapString = setNewLocationTextField.text, mapString != "" {
             // Init myLocation property of ParseClient with first/last name and coordinates
-            ParseClient.sharedInstance().myLocation = try! StudentLocation([ParseClient.ParseResponseKeys.firstName: ParseClient.sharedInstance().userFirstName! as AnyObject,
+            ParseClient.sharedInstance().myLocation = StudentLocation([ParseClient.ParseResponseKeys.firstName: ParseClient.sharedInstance().userFirstName! as AnyObject,
                                                                             ParseClient.ParseResponseKeys.lastName: ParseClient.sharedInstance().userLastName! as AnyObject,
                                                                             ParseClient.ParseResponseKeys.latitude:userLatitude! as AnyObject,
                                                                             ParseClient.ParseResponseKeys.longitude:userLongitude! as AnyObject])

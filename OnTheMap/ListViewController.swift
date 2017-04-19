@@ -10,20 +10,17 @@ import UIKit
 
 class ListViewController: UITableViewController {
     
-    var studentLocations = [StudentLocation]()
-    
     // MARK: Life cycle
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        // Get data from the Model and reload table
-        studentLocations = ParseClient.sharedInstance().studentLocations
+        // Reload table data
         tableView.reloadData()
     }
     
     // MARK: TableView Delegate & Data Source functions
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return studentLocations.count
+        return ParseClient.sharedInstance().studentLocations.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -31,15 +28,16 @@ class ListViewController: UITableViewController {
         let listCell = tableView.dequeueReusableCell(withIdentifier: ParseClient.StoryBoardIdentifiers.listCellReuseIdentifier) as UITableViewCell!
         
         // Setup cell
-        listCell?.textLabel?.text = "\(studentLocations[indexPath.row].firstName) \(ParseClient.sharedInstance().studentLocations[indexPath.row].lastName)"
-        listCell?.detailTextLabel?.text = "\(studentLocations[indexPath.row].mapString)"
+        listCell?.textLabel?.text = "\(ParseClient.sharedInstance().studentLocations[indexPath.row].firstName) \(ParseClient.sharedInstance().studentLocations[indexPath.row].lastName)"
+        listCell?.detailTextLabel?.text = "\(ParseClient.sharedInstance().studentLocations[indexPath.row].mapString)"
         
         return listCell!
     }
     
+    // TODO: Replace DetailVC with WebView
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let locationDetailsViewControler = storyboard?.instantiateViewController(withIdentifier: ParseClient.StoryBoardIdentifiers.locationDetailsController) as! LocationDetailsViewController
-        locationDetailsViewControler.studentLocation = studentLocations[indexPath.row]
+        locationDetailsViewControler.studentLocation = ParseClient.sharedInstance().studentLocations[indexPath.row]
         navigationController?.pushViewController(locationDetailsViewControler, animated: true)
     }
     

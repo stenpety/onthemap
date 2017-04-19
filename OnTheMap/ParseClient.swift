@@ -14,8 +14,10 @@ class ParseClient: NSObject {
     var sessionID: String? = nil
     var userID: String? = nil
     
+    // Main data storage property
     var studentLocations = [StudentLocation]()
     
+    // Properties to store user's own data
     var myLocation: StudentLocation?
     var userFirstName: String?
     var userLastName: String?

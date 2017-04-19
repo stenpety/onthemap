@@ -35,6 +35,7 @@ class TabManagerViewController: UITabBarController {
     }
     
     // Refresh button - common for Map and List
+    // TODO: Refresh main data storing array in Model - check that update is applied to Map/List VCs
     @IBAction func refreshStudentLocations(_ sender: UIBarButtonItem) {
         ParseClient.sharedInstance().getAllStudentLocations(completionHandlerForGetAllStudentLocations: {(success, error) in
             if success {
@@ -43,11 +44,9 @@ class TabManagerViewController: UITabBarController {
                     showAlert(viewController: self, title: ParseClient.ErrorStrings.success, message: "Database updated", actionTitle: ParseClient.ErrorStrings.dismiss)
                     
                     // Update the table ('list') view
-                    ListViewController.sharedInstance().studentLocations = ParseClient.sharedInstance().studentLocations
                     ListViewController.sharedInstance().tableView.reloadData()
                     
                     // TODO: Refresh map view
-                    MapViewController.sharedInstance().studentLocations = ParseClient.sharedInstance().studentLocations
                 }
             } else {
                 performUIUpdatesOnMain {

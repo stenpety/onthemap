@@ -11,9 +11,6 @@ import MapKit
 
 class MapViewController: UIViewController, MKMapViewDelegate {
     
-    // MARK: Properties
-    var studentLocations = [StudentLocation]()
-    
     // MARK: Outlets
     @IBOutlet weak var studentLocationsMapView: MKMapView!
     
@@ -28,9 +25,9 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        studentLocations = ParseClient.sharedInstance().studentLocations
+        // Make annotations using Student locations data and add them to the MapView
         var annotations = [MKPointAnnotation]()
-        for studentLocation in studentLocations {
+        for studentLocation in ParseClient.sharedInstance().studentLocations {
             let latitude = CLLocationDegrees(studentLocation.latitude)
             let longitude = CLLocationDegrees(studentLocation.longitude)
             
@@ -76,13 +73,14 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             
             // Fing out which StudentLocation is selected
             var selectedStudentLocation: StudentLocation? = nil
-            for location in studentLocations {
+            for location in ParseClient.sharedInstance().studentLocations {
                 if (location.latitude == view.annotation?.coordinate.latitude) && (location.longitude == view.annotation?.coordinate.longitude) {
                     selectedStudentLocation = location
                 }
             }
             
             // Push details VC with data from selected location
+            // TODO: Replace 'details VC' with WebView
             let locationDetailsViewController = storyboard!.instantiateViewController(withIdentifier: ParseClient.StoryBoardIdentifiers.locationDetailsController) as! LocationDetailsViewController
             if let selectedLocation = selectedStudentLocation {
                 locationDetailsViewController.studentLocation = selectedLocation
@@ -91,11 +89,11 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         }
     }
     
-    // MARK: Map VC singleton shared instance
-    class func sharedInstance() -> MapViewController {
-        struct Singleton {
-            static let sharedInstance = MapViewController()
-        }
-        return Singleton.sharedInstance
-    }
+//    // MARK: Map VC singleton shared instance
+//    class func sharedInstance() -> MapViewController {
+//        struct Singleton {
+//            static let sharedInstance = MapViewController()
+//        }
+//        return Singleton.sharedInstance
+//    }
 }
