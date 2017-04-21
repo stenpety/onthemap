@@ -9,15 +9,19 @@
 import UIKit
 import MapKit
 
-class AddNewPinViewController: UIViewController {
-    
-    // MARK: Properties
-    var userLatitude: Double?
-    var userLongitude: Double?
+class AddNewPinViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: Outlets
     @IBOutlet weak var setNewLocationTextField: UITextField!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
+    // MARK: Life cycle
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        setNewLocationTextField.delegate = self
+    }
+    
     
     // MARK: Actions
     @IBAction func cancelButtonPressed(_ sender: UIBarButtonItem) {
@@ -30,8 +34,8 @@ class AddNewPinViewController: UIViewController {
         activityIndicator.startAnimating()
         
         if let mapString = setNewLocationTextField.text, mapString != "" {
-            // Change corresponding myLocation properties: mapString, Udacity ID, and coordinates
             
+            // Change corresponding myLocation properties: mapString, Udacity ID, and coordinates
             ParseClient.sharedInstance().myLocation?.mapString = mapString
             ParseClient.sharedInstance().myLocation?.uniqueKey = ParseClient.Constants.petrSteninUdacityID
             
@@ -40,9 +44,9 @@ class AddNewPinViewController: UIViewController {
                 if let placemark = placemarks?[0] {
                     ParseClient.sharedInstance().myLocation?.latitude = placemark.location!.coordinate.latitude
                     ParseClient.sharedInstance().myLocation?.longitude = placemark.location!.coordinate.longitude
-                    print("GEOCODED!")
                     self.activityIndicator.stopAnimating()
                     
+                    // Instantiate and push PlaceNewPinVC
                     let placeNewPinVC = self.storyboard!.instantiateViewController(withIdentifier: ParseClient.StoryBoardIdentifiers.placeNewPinController) as! PlaceNewPinViewController
                     self.navigationController?.pushViewController(placeNewPinVC, animated: true)
                 } else {
@@ -63,5 +67,11 @@ class AddNewPinViewController: UIViewController {
             static let sharedInstance = AddNewPinViewController()
         }
         return Singleton.sharedInstance
+    }
+    
+    // MARK: Text Field Delegate
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        setNewLocationTextField.resignFirstResponder()
+        return true
     }
 }

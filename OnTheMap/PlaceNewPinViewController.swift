@@ -9,7 +9,7 @@
 import UIKit
 import MapKit
 
-class PlaceNewPinViewController: UIViewController {
+class PlaceNewPinViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: Outlets
     @IBOutlet weak var mediaURLLabel: UITextField!
@@ -35,6 +35,9 @@ class PlaceNewPinViewController: UIViewController {
         // Set mapView's region to match user's location
         let region = MKCoordinateRegionMakeWithDistance(myCoordinate, ParseClient.MapViewConstants.mapViewFineScale, ParseClient.MapViewConstants.mapViewFineScale)
         placeNewPinMapView.setRegion(region, animated: true)
+        
+        // Set text field delegate
+        mediaURLLabel.delegate = self
     }
     
     // MARK: Actions
@@ -80,5 +83,11 @@ class PlaceNewPinViewController: UIViewController {
                 }
             })
         }
+    }
+    
+    // MARK: Text field delegate
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        mediaURLLabel.resignFirstResponder()
+        return true
     }
 }
