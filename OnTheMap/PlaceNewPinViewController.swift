@@ -49,7 +49,7 @@ class PlaceNewPinViewController: UIViewController {
         
         // Check whether location exists
         if ParseClient.sharedInstance().locationExists {
-            ParseClient.sharedInstance().putNewLocation(locationIDToReplace: ParseClient.sharedInstance().locationID!, mapString: (ParseClient.sharedInstance().myLocation?.mapString)!, mediaURL: mediaURL, latitude: latString, longitude: longString, completionHandlerForPutNewLocation: {(success, error) in
+            ParseClient.sharedInstance().putNewLocation(locationIDToReplace: ParseClient.sharedInstance().myLocation!.objectID, mapString: (ParseClient.sharedInstance().myLocation?.mapString)!, mediaURL: mediaURL, latitude: latString, longitude: longString, completionHandlerForPutNewLocation: {(success, error) in
                 
                 if success {
                     performUIUpdatesOnMain {

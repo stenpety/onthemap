@@ -68,7 +68,7 @@ extension ParseClient {
             let userInfo = getUserData[ParseClient.UdacityUserData.user] as! [String:AnyObject]
             if let userFirstName = userInfo[ParseClient.UdacityUserData.firstName] as? String, let userLastName = userInfo[ParseClient.UdacityUserData.lastName] as? String {
                 
-                // Make parameteres dictionary. Set lat/long to defaults (will be changed at the next scene)
+                // Make parameteres dictionary. Set lat/long & mediaURL to defaults (will be changed at the next scene)
                 let parametersForMyLocation = [ParseClient.ParseResponseKeys.firstName:userFirstName,
                                                ParseClient.ParseResponseKeys.lastName:userLastName,
                                                ParseClient.ParseResponseKeys.latitude:ParseClient.MapViewConstants.defaultLatitude,
@@ -162,7 +162,7 @@ extension ParseClient {
         var headerParameters = ParseClient.JSONHeaderCommon.jsonHeaderCommonParse
         headerParameters[ParseClient.JSONHeaderField.contentType] = ParseClient.JSONHeaderValues.appJSON
         
-        let jsonBody = "{\"uniqueKey\": \"\(ParseClient.Constants.petrSteninUdacityID)\", \"firstName\": \"\(ParseClient.sharedInstance().userFirstName!)\", \"lastName\": \"\(ParseClient.sharedInstance().userLastName!)\",\"mapString\": \"\(mapString)\", \"mediaURL\": \"\(mediaURL)\",\"latitude\": \(latitude), \"longitude\": \(longitude)}"
+        let jsonBody = "{\"uniqueKey\": \"\(ParseClient.Constants.petrSteninUdacityID)\", \"firstName\": \"\(ParseClient.sharedInstance().myLocation!.firstName)\", \"lastName\": \"\(ParseClient.sharedInstance().myLocation!.lastName)\",\"mapString\": \"\(mapString)\", \"mediaURL\": \"\(mediaURL)\",\"latitude\": \(latitude), \"longitude\": \(longitude)}"
         
         let _ = ParseClient.sharedInstance().taskForMethod(ParseClient.MethodTypes.post, withURL: urlForPostNewLocation, httpHeaderFieldValue: headerParameters, httpBody: jsonBody, completionHandlerForTask: {(data, error) in
             
@@ -173,7 +173,7 @@ extension ParseClient {
             
             let sessionInfo = data as! [String:AnyObject]
             if let objectID = sessionInfo[ParseClient.ParseResponseKeys.objectID] {
-                ParseClient.sharedInstance().locationID = (objectID as! String)
+                ParseClient.sharedInstance().myLocation?.objectID = (objectID as! String)
                 completionHandlerForPostNewLocation(true, nil)
             } else {
                 completionHandlerForPostNewLocation(false, NSError(domain: "postNewLocation", code: 1, userInfo: [NSLocalizedDescriptionKey:"Cannot post a new location"]))
@@ -189,7 +189,7 @@ extension ParseClient {
         var headerParameters = ParseClient.JSONHeaderCommon.jsonHeaderCommonParse
         headerParameters[ParseClient.JSONHeaderField.contentType] = ParseClient.JSONHeaderValues.appJSON
         
-        let jsonBody = "{\"uniqueKey\": \"\(ParseClient.Constants.petrSteninUdacityID)\", \"firstName\": \"\(ParseClient.sharedInstance().userFirstName!)\", \"lastName\": \"\(ParseClient.sharedInstance().userLastName!)\",\"mapString\": \"\(mapString)\", \"mediaURL\": \"\(mediaURL)\",\"latitude\": \(latitude), \"longitude\": \(longitude)}"
+        let jsonBody = "{\"uniqueKey\": \"\(ParseClient.Constants.petrSteninUdacityID)\", \"firstName\": \"\(ParseClient.sharedInstance().myLocation!.firstName)\", \"lastName\": \"\(ParseClient.sharedInstance().myLocation!.lastName)\",\"mapString\": \"\(mapString)\", \"mediaURL\": \"\(mediaURL)\",\"latitude\": \(latitude), \"longitude\": \(longitude)}"
         
         let _ = ParseClient.sharedInstance().taskForMethod(ParseClient.MethodTypes.put, withURL: urlForPutNewLocation, httpHeaderFieldValue: headerParameters, httpBody: jsonBody, completionHandlerForTask: {(data, error) in
             

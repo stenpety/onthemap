@@ -20,11 +20,6 @@ class ParseClient: NSObject {
     // Properties to store user's own data
     var myLocation: StudentLocation?
     
-    // TODO: Do I need the below properties? YES, data retrieved from the server are stored there... To be REMOVED!
-    var userFirstName: String?
-    var userLastName: String?
-    var locationID: String?
-    
     // Flag to indicate that location exists. Default value is 'false'
     var locationExists = false
     
