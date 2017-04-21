@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import CoreLocation
+import MapKit
 
 class AddNewPinViewController: UIViewController {
     
@@ -27,21 +27,30 @@ class AddNewPinViewController: UIViewController {
     @IBAction func findOnTheMap(_ sender: UIButton) {
         
         if let mapString = setNewLocationTextField.text, mapString != "" {
-            // Init myLocation property of ParseClient with first/last name and coordinates
-            
-            
+            // Change corresponding myLocation properties: mapString, Udacity ID, and coordinates
             
             ParseClient.sharedInstance().myLocation?.mapString = mapString
             ParseClient.sharedInstance().myLocation?.uniqueKey = ParseClient.Constants.petrSteninUdacityID
             
-            let placeNewPinVC = storyboard!.instantiateViewController(withIdentifier: ParseClient.StoryBoardIdentifiers.placeNewPinController) as! PlaceNewPinViewController
-            navigationController?.pushViewController(placeNewPinVC, animated: true)
+            let geocoder = CLGeocoder()
+            geocoder.geocodeAddressString(mapString, completionHandler: {(placemarks, error) in
+                if let placemark = placemarks?[0] {
+                    ParseClient.sharedInstance().myLocation?.latitude = placemark.location!.coordinate.latitude
+                    ParseClient.sharedInstance().myLocation?.longitude = placemark.location!.coordinate.longitude
+                    print("GEOCODED!")
+                    let placeNewPinVC = self.storyboard!.instantiateViewController(withIdentifier: ParseClient.StoryBoardIdentifiers.placeNewPinController) as! PlaceNewPinViewController
+                    self.navigationController?.pushViewController(placeNewPinVC, animated: true)
+                }
+            })
+            
+            
         } else {
             showAlert(viewController: self, title: ParseClient.ErrorStrings.error, message: "Location name cannot be empty!", actionTitle: ParseClient.ErrorStrings.dismiss)
         }
     }
     
     // MARK: Singleton shared instance
+    // TODO: Do I need it?
     class func sharedInstance() -> AddNewPinViewController {
         struct Singleton {
             static let sharedInstance = AddNewPinViewController()

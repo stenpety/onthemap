@@ -41,6 +41,12 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate {
         passwordTextField.text = nil
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        locationManager.stopUpdatingLocation()
+    }
+    
     // MARK: Actions
     
     @IBAction private func loginWithUdacity(_ sender: UIButton) {
