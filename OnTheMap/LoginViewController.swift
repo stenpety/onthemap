@@ -62,19 +62,25 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate {
                                 }
                             } else {
                                 performUIUpdatesOnMain {
-                                    showAlert(viewController: self, title: ParseClient.ErrorStrings.error, message: error?.description, actionTitle: ParseClient.ErrorStrings.dismiss)
+                                    
+                                    // Alert: Download of all Student Locations failed
+                                    showAlert(viewController: self, title: ParseClient.ErrorStrings.error, message: (error?.userInfo[NSLocalizedDescriptionKey] as! String), actionTitle: ParseClient.ErrorStrings.dismiss)
                                 }
                             }
                         })
                     } else {
                         performUIUpdatesOnMain {
-                            showAlert(viewController: self, title: ParseClient.ErrorStrings.error, message: error?.description, actionTitle: ParseClient.ErrorStrings.dismiss)
+                            
+                            // Alert: Get initial user info failed
+                            showAlert(viewController: self, title: ParseClient.ErrorStrings.error, message: (error?.userInfo[NSLocalizedDescriptionKey] as! String), actionTitle: ParseClient.ErrorStrings.dismiss)
                         }
                     }
                 })
             } else {
                 performUIUpdatesOnMain {
-                    showAlert(viewController: self, title: ParseClient.ErrorStrings.error, message: error?.description, actionTitle: ParseClient.ErrorStrings.dismiss)
+                    
+                    // Alert:
+                    showAlert(viewController: self, title: ParseClient.ErrorStrings.error, message: (error?.userInfo[NSLocalizedDescriptionKey] as! String), actionTitle: ParseClient.ErrorStrings.dismiss)
                 }
             }
         })
