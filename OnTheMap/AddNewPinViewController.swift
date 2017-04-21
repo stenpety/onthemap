@@ -17,14 +17,17 @@ class AddNewPinViewController: UIViewController {
     
     // MARK: Outlets
     @IBOutlet weak var setNewLocationTextField: UITextField!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     // MARK: Actions
     @IBAction func cancelButtonPressed(_ sender: UIBarButtonItem) {
         self.dismiss(animated: true, completion: nil)
     }
     
-    // TODO: Search locations' coordinates
     @IBAction func findOnTheMap(_ sender: UIButton) {
+        
+        self.view.bringSubview(toFront: activityIndicator)
+        activityIndicator.startAnimating()
         
         if let mapString = setNewLocationTextField.text, mapString != "" {
             // Change corresponding myLocation properties: mapString, Udacity ID, and coordinates
@@ -38,8 +41,12 @@ class AddNewPinViewController: UIViewController {
                     ParseClient.sharedInstance().myLocation?.latitude = placemark.location!.coordinate.latitude
                     ParseClient.sharedInstance().myLocation?.longitude = placemark.location!.coordinate.longitude
                     print("GEOCODED!")
+                    self.activityIndicator.stopAnimating()
+                    
                     let placeNewPinVC = self.storyboard!.instantiateViewController(withIdentifier: ParseClient.StoryBoardIdentifiers.placeNewPinController) as! PlaceNewPinViewController
                     self.navigationController?.pushViewController(placeNewPinVC, animated: true)
+                } else {
+                    showAlert(viewController: self, title: ParseClient.ErrorStrings.error, message: "Could not geocode your location!", actionTitle: ParseClient.ErrorStrings.dismiss)
                 }
             })
             

@@ -83,6 +83,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <activityIndicatorView hidden="YES" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="Rxu-M5-Ee9">
+                                <rect key="frame" x="169" y="315" width="37" height="37"/>
+                                <color key="color" red="0.20000000000000001" green="0.0" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                            </activityIndicatorView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="ixc-I2-wra">
                                 <rect key="frame" x="16" y="99" width="343" height="560"/>
                                 <subviews>
@@ -114,7 +118,9 @@
                             <constraint firstItem="ixc-I2-wra" firstAttribute="top" secondItem="pmg-Ed-gsb" secondAttribute="bottom" constant="35" id="B9s-0x-H4A"/>
                             <constraint firstItem="NWD-se-5Pb" firstAttribute="top" secondItem="ixc-I2-wra" secondAttribute="bottom" constant="8" symbolic="YES" id="V3D-cT-UuI"/>
                             <constraint firstItem="ixc-I2-wra" firstAttribute="leading" secondItem="ZOm-RA-koZ" secondAttribute="leadingMargin" id="gDa-9N-qlv"/>
+                            <constraint firstItem="Rxu-M5-Ee9" firstAttribute="centerY" secondItem="ZOm-RA-koZ" secondAttribute="centerY" id="gYE-fO-xhE"/>
                             <constraint firstAttribute="trailingMargin" secondItem="ixc-I2-wra" secondAttribute="trailing" id="kej-Pd-o8G"/>
+                            <constraint firstItem="Rxu-M5-Ee9" firstAttribute="centerX" secondItem="ZOm-RA-koZ" secondAttribute="centerX" id="u91-Ci-gPB"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Age-Oo-0Ca">
@@ -125,6 +131,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="activityIndicator" destination="Rxu-M5-Ee9" id="x9S-b7-Q47"/>
                         <outlet property="setNewLocationTextField" destination="Wvg-RX-kX1" id="jnL-C5-Zct"/>
                     </connections>
                 </viewController>
