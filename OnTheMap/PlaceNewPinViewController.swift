@@ -61,7 +61,9 @@ class PlaceNewPinViewController: UIViewController, UITextFieldDelegate {
                     }
                 } else {
                     performUIUpdatesOnMain {
-                        showAlert(viewController: self, title: ParseClient.ErrorStrings.error, message: error?.description, actionTitle: ParseClient.ErrorStrings.dismiss)
+                        
+                        // Alert: PUT new location failed
+                        showAlert(viewController: self, title: ParseClient.ErrorStrings.error, message: (error?.userInfo[NSLocalizedDescriptionKey] as! String), actionTitle: ParseClient.ErrorStrings.dismiss)
                     }
                 }
                 })
@@ -78,7 +80,9 @@ class PlaceNewPinViewController: UIViewController, UITextFieldDelegate {
                     }
                 } else {
                     performUIUpdatesOnMain {
-                        showAlert(viewController: self, title: ParseClient.ErrorStrings.error, message: error?.description, actionTitle: ParseClient.ErrorStrings.dismiss)
+                        
+                        // Alert: POST new location failed
+                        showAlert(viewController: self, title: ParseClient.ErrorStrings.error, message: (error?.userInfo[NSLocalizedDescriptionKey] as! String), actionTitle: ParseClient.ErrorStrings.dismiss)
                     }
                 }
             })
