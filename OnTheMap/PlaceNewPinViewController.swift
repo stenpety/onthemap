@@ -54,8 +54,7 @@ class PlaceNewPinViewController: UIViewController {
                 if success {
                     performUIUpdatesOnMain {
                         // Get back to Intial view - Tab bar controller
-                        let navigationManagerController = self.storyboard!.instantiateViewController(withIdentifier: ParseClient.StoryBoardIdentifiers.navigationManagerController) as! UINavigationController
-                        self.present(navigationManagerController, animated: true, completion: nil)
+                        self.navigationController?.dismiss(animated: true, completion: nil)
                     }
                 } else {
                     performUIUpdatesOnMain {
@@ -72,8 +71,7 @@ class PlaceNewPinViewController: UIViewController {
                     
                     performUIUpdatesOnMain {
                         // Get back to Intial view - Tab bar controller
-                        let navigationManagerController = self.storyboard!.instantiateViewController(withIdentifier: ParseClient.StoryBoardIdentifiers.navigationManagerController) as! UINavigationController
-                        self.present(navigationManagerController, animated: true, completion: nil)
+                        self.navigationController?.dismiss(animated: true, completion: nil)
                     }
                 } else {
                     performUIUpdatesOnMain {
