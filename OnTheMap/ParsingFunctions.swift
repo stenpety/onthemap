@@ -25,7 +25,11 @@ extension ParseClient {
             
             guard error == nil else {
                 // Launch completion handler with parms for unsuccessful option
-                completionHandlerForLogin(false, error)
+                if (error?.description.contains("offline"))! {
+                    completionHandlerForLogin(false, NSError(domain: "getSessionAndUserID", code: 1, userInfo: [NSLocalizedDescriptionKey:"Internet connection is offline"]))
+                } else {
+                    completionHandlerForLogin(false, error)
+                }
                 return
             }
             
@@ -59,7 +63,11 @@ extension ParseClient {
         let _ = ParseClient.sharedInstance().taskForMethod(ParseClient.MethodTypes.get, withURL: urlForGetUserInfo, httpHeaderFieldValue: [:], httpBody: nil, completionHandlerForTask: {(data, error) in
             
             guard error == nil else {
-                completionHandlerForGetIserInfo(false, error)
+                if (error?.description.contains("offline"))! {
+                    completionHandlerForGetIserInfo(false, NSError(domain: "getInitialUserInfo", code: 1, userInfo: [NSLocalizedDescriptionKey:"Internet connection is offline"]))
+                } else {
+                    completionHandlerForGetIserInfo(false, error)
+                }
                 return
             }
             let getUserData = data as! [String:AnyObject]
@@ -96,7 +104,11 @@ extension ParseClient {
         let _ = ParseClient.sharedInstance().taskForMethod(ParseClient.MethodTypes.get, withURL: urlForGetAllStudentLocations, httpHeaderFieldValue: ParseClient.JSONHeaderCommon.jsonHeaderCommonParse, httpBody: nil, completionHandlerForTask: {(data, error) in
             
             guard error == nil else {
-                completionHandlerForGetAllStudentLocations(false, error)
+                if (error?.description.contains("offline"))! {
+                    completionHandlerForGetAllStudentLocations(false, NSError(domain: "getAllStudentLocations", code: 1, userInfo: [NSLocalizedDescriptionKey:"Internet connection is offline"]))
+                } else {
+                    completionHandlerForGetAllStudentLocations(false, error)
+                }
                 return
             }
             
@@ -142,7 +154,11 @@ extension ParseClient {
         let _ = ParseClient.sharedInstance().taskForMethod(ParseClient.MethodTypes.delete, withURL: urlForDeleteSessionID, httpHeaderFieldValue: headerParameters, httpBody: nil, completionHandlerForTask: {(data, error) in
             
             guard error == nil else {
-                completionHandlerForDeleteSessionID(false, error)
+                if (error?.description.contains("offline"))! {
+                    completionHandlerForDeleteSessionID(false, NSError(domain: "deleteSessionID", code: 1, userInfo: [NSLocalizedDescriptionKey:"Internet connection is offline"]))
+                } else {
+                    completionHandlerForDeleteSessionID(false, error)
+                }
                 return
             }
             
@@ -170,7 +186,11 @@ extension ParseClient {
         let _ = ParseClient.sharedInstance().taskForMethod(ParseClient.MethodTypes.post, withURL: urlForPostNewLocation, httpHeaderFieldValue: headerParameters, httpBody: jsonBody, completionHandlerForTask: {(data, error) in
             
             guard error == nil else {
-                completionHandlerForPostNewLocation(false, error)
+                if (error?.description.contains("offline"))! {
+                    completionHandlerForPostNewLocation(false, NSError(domain: "postNewLocation", code: 1, userInfo: [NSLocalizedDescriptionKey:"Internet connection is offline"]))
+                } else {
+                    completionHandlerForPostNewLocation(false, error)
+                }
                 return
             }
             
@@ -197,7 +217,11 @@ extension ParseClient {
         let _ = ParseClient.sharedInstance().taskForMethod(ParseClient.MethodTypes.put, withURL: urlForPutNewLocation, httpHeaderFieldValue: headerParameters, httpBody: jsonBody, completionHandlerForTask: {(data, error) in
             
             guard error == nil else {
-                completionHandlerForPutNewLocation(false, error)
+                if (error?.description.contains("offline"))! {
+                    completionHandlerForPutNewLocation(false, NSError(domain: "putNewLocation", code: 1, userInfo: [NSLocalizedDescriptionKey:"Internet connection is offline"]))
+                } else {
+                    completionHandlerForPutNewLocation(false, error)
+                }
                 return
             }
             

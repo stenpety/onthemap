@@ -45,10 +45,15 @@ class ParseClient: NSObject {
                 return
             }
             
-            // Check whether a response value is valid
+            // Check returned status code
             guard let statusCode = (response as? HTTPURLResponse)?.statusCode, statusCode >= 200 && statusCode <= 299 else {
                 if let statusCode = (response as? HTTPURLResponse)?.statusCode {
-                    sendError("Request returned a status code other than 2xx: \(statusCode)")
+                    switch statusCode {
+                    case 403: sendError("Forbidden: wrong username/password")
+                    case 404: sendError("Not found")
+                    case 405: sendError("Method not allowed")
+                    default: sendError("Bad status code: \(statusCode)")
+                    }
                 } else {
                     sendError("Request returned a status code other than 2xx")
                 }

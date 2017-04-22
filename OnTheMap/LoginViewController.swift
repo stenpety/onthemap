@@ -76,7 +76,7 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, UITextFi
                                     
                                     // Alert: Download of all Student Locations failed
                                     self.loginActivityIndicator.stopAnimating() //Stop Activity indicator
-                                    showAlert(viewController: self, title: ParseClient.ErrorStrings.error, message: (error?.userInfo[NSLocalizedDescriptionKey] as! String), actionTitle: ParseClient.ErrorStrings.dismiss)
+                                    showAlert(viewController: self, title: ParseClient.ErrorStrings.error, message: error?.localizedDescription, actionTitle: ParseClient.ErrorStrings.dismiss)
                                 }
                             }
                         })
@@ -85,7 +85,7 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, UITextFi
                             
                             // Alert: Get initial user info failed
                             self.loginActivityIndicator.stopAnimating() //Stop Activity indicator
-                            showAlert(viewController: self, title: ParseClient.ErrorStrings.error, message: (error?.userInfo[NSLocalizedDescriptionKey] as! String), actionTitle: ParseClient.ErrorStrings.dismiss)
+                            showAlert(viewController: self, title: ParseClient.ErrorStrings.error, message: error?.localizedDescription, actionTitle: ParseClient.ErrorStrings.dismiss)
                         }
                     }
                 })
@@ -94,7 +94,7 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, UITextFi
                     
                     // Alert:
                     self.loginActivityIndicator.stopAnimating() //Stop Activity indicator
-                    showAlert(viewController: self, title: ParseClient.ErrorStrings.error, message: (error?.userInfo[NSLocalizedDescriptionKey] as! String), actionTitle: ParseClient.ErrorStrings.dismiss)
+                    showAlert(viewController: self, title: ParseClient.ErrorStrings.error, message: error?.localizedDescription, actionTitle: ParseClient.ErrorStrings.dismiss)
                 }
             }
         })
