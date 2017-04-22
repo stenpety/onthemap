@@ -40,7 +40,7 @@ class ListViewController: UITableViewController {
         // Deselect row:
         tableView.deselectRow(at: indexPath, animated: true)
         
-        if let mediaURL = URL(string: StudentDataSource.sharedInstance.studentLocations[indexPath.row].mediaURL) {
+        if let mediaURL = URL(string: StudentDataSource.sharedInstance.studentLocations[indexPath.row].mediaURL), UIApplication.shared.canOpenURL(mediaURL) {
             UIApplication.shared.open(mediaURL, options: [:], completionHandler: nil)
         } else {
             showAlert(viewController: self, title: ParseClient.ErrorStrings.error, message: "This student location contains no valid URL to display", actionTitle: ParseClient.ErrorStrings.dismiss)

@@ -84,7 +84,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
                 return
             }
             
-            if let mediaURL = URL(string: selectedLocation.mediaURL) {
+            if let mediaURL = URL(string: selectedLocation.mediaURL), UIApplication.shared.canOpenURL(mediaURL) {
                 UIApplication.shared.open(mediaURL, options: [:], completionHandler: nil)
             } else {
                 showAlert(viewController: self, title: ParseClient.ErrorStrings.error, message: "This student location contains no valid URL to display", actionTitle: ParseClient.ErrorStrings.dismiss)
