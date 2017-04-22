@@ -22,6 +22,19 @@ class AddNewPinViewController: UIViewController, UITextFieldDelegate {
         setNewLocationTextField.delegate = self
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // Subscribe to KB notifications in order to move view once KB appears
+        self.subscribeToKeyboardNotifications()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        // Unsubscribe from KB notifications
+        self.unsubscribeFromKeyboardNotifications()
+    }
     
     // MARK: Actions
     @IBAction func cancelButtonPressed(_ sender: UIBarButtonItem) {
@@ -74,5 +87,40 @@ class AddNewPinViewController: UIViewController, UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         setNewLocationTextField.resignFirstResponder()
         return true
+    }
+    
+    // viewWillTransition - hide keyboard while turning device
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        
+        setNewLocationTextField.resignFirstResponder()
+    }
+    
+    // MARK: - Move the view when KB appears
+    func keyboardWillShow(notification: NSNotification) {
+        if setNewLocationTextField.isFirstResponder {
+            view.frame.origin.y = getKeyboardHeight(notification: notification) * (-1)
+        }
+    }
+    
+    func keyboardWillHide(notification: NSNotification) {
+        view.frame.origin.y = 0
+    }
+    
+    func getKeyboardHeight(notification: NSNotification) -> CGFloat {
+        let userInfo = notification.userInfo
+        let keyboardSize = userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue
+        return keyboardSize.cgRectValue.height
+    }
+    
+    // MARK: - Subscribe/unsubscribe to notifications
+    func subscribeToKeyboardNotifications() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: .UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: .UIKeyboardWillHide, object: nil)
+    }
+    
+    func unsubscribeFromKeyboardNotifications() {
+        NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillHide, object: nil)
     }
 }
