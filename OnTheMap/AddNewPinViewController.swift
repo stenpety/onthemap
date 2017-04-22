@@ -50,6 +50,7 @@ class AddNewPinViewController: UIViewController, UITextFieldDelegate {
                     let placeNewPinVC = self.storyboard!.instantiateViewController(withIdentifier: ParseClient.StoryBoardIdentifiers.placeNewPinController) as! PlaceNewPinViewController
                     self.navigationController?.pushViewController(placeNewPinVC, animated: true)
                 } else {
+                    self.activityIndicator.stopAnimating()
                     showAlert(viewController: self, title: ParseClient.ErrorStrings.error, message: "Could not geocode your location!", actionTitle: ParseClient.ErrorStrings.dismiss)
                 }
             })
