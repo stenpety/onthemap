@@ -95,8 +95,8 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate {
     // Get user's coordinates and update Model's properties
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let userLocation:CLLocation = locations[0]
-        ParseClient.sharedInstance().myLocation?.latitude = userLocation.coordinate.latitude
-        ParseClient.sharedInstance().myLocation?.longitude = userLocation.coordinate.longitude
+        StudentDataSource.sharedInstance.myLocation?.latitude = userLocation.coordinate.latitude
+        StudentDataSource.sharedInstance.myLocation?.longitude = userLocation.coordinate.longitude
     }
 }
 

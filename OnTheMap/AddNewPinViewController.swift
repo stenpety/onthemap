@@ -36,14 +36,14 @@ class AddNewPinViewController: UIViewController, UITextFieldDelegate {
         if let mapString = setNewLocationTextField.text, mapString != "" {
             
             // Change corresponding myLocation properties: mapString, Udacity ID, and coordinates
-            ParseClient.sharedInstance().myLocation?.mapString = mapString
-            ParseClient.sharedInstance().myLocation?.uniqueKey = ParseClient.Constants.petrSteninUdacityID
+            StudentDataSource.sharedInstance.myLocation?.mapString = mapString
+            StudentDataSource.sharedInstance.myLocation?.uniqueKey = ParseClient.Constants.petrSteninUdacityID
             
             let geocoder = CLGeocoder()
             geocoder.geocodeAddressString(mapString, completionHandler: {(placemarks, error) in
                 if let placemark = placemarks?[0] {
-                    ParseClient.sharedInstance().myLocation?.latitude = placemark.location!.coordinate.latitude
-                    ParseClient.sharedInstance().myLocation?.longitude = placemark.location!.coordinate.longitude
+                    StudentDataSource.sharedInstance.myLocation?.latitude = placemark.location!.coordinate.latitude
+                    StudentDataSource.sharedInstance.myLocation?.longitude = placemark.location!.coordinate.longitude
                     self.activityIndicator.stopAnimating()
                     
                     // Instantiate and push PlaceNewPinVC

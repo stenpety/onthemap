@@ -20,15 +20,15 @@ class PlaceNewPinViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         
         // Get user's coordinated from the Model
-        let myLatitude = CLLocationDegrees(ParseClient.sharedInstance().myLocation!.latitude)
-        let myLongitude = CLLocationDegrees(ParseClient.sharedInstance().myLocation!.longitude)
+        let myLatitude = CLLocationDegrees(StudentDataSource.sharedInstance.myLocation!.latitude)
+        let myLongitude = CLLocationDegrees(StudentDataSource.sharedInstance.myLocation!.longitude)
         let myCoordinate = CLLocationCoordinate2D(latitude: myLatitude, longitude: myLongitude)
         
         // Make Map annotation from Model data
         let myLocationAnnotation = MKPointAnnotation()
         myLocationAnnotation.coordinate = myCoordinate
-        myLocationAnnotation.title = "\(ParseClient.sharedInstance().myLocation!.firstName) \(ParseClient.sharedInstance().myLocation!.lastName)"
-        myLocationAnnotation.subtitle = "\(ParseClient.sharedInstance().myLocation!.mediaURL)"
+        myLocationAnnotation.title = "\(StudentDataSource.sharedInstance.myLocation!.firstName) \(StudentDataSource.sharedInstance.myLocation!.lastName)"
+        myLocationAnnotation.subtitle = "\(StudentDataSource.sharedInstance.myLocation!.mediaURL)"
         
         placeNewPinMapView.addAnnotation(myLocationAnnotation)
         
@@ -47,12 +47,12 @@ class PlaceNewPinViewController: UIViewController, UITextFieldDelegate {
             return
         }
         
-        let latString = String(describing: ParseClient.sharedInstance().myLocation!.latitude)
-        let longString = String(describing: ParseClient.sharedInstance().myLocation!.longitude)
+        let latString = String(describing: StudentDataSource.sharedInstance.myLocation!.latitude)
+        let longString = String(describing: StudentDataSource.sharedInstance.myLocation!.longitude)
         
         // Check whether location exists
-        if ParseClient.sharedInstance().locationExists {
-            ParseClient.sharedInstance().putNewLocation(locationIDToReplace: ParseClient.sharedInstance().myLocation!.objectID, mapString: (ParseClient.sharedInstance().myLocation?.mapString)!, mediaURL: mediaURL, latitude: latString, longitude: longString, completionHandlerForPutNewLocation: {(success, error) in
+        if StudentDataSource.sharedInstance.locationExists {
+            ParseClient.sharedInstance().putNewLocation(locationIDToReplace: StudentDataSource.sharedInstance.myLocation!.objectID, mapString: (StudentDataSource.sharedInstance.myLocation?.mapString)!, mediaURL: mediaURL, latitude: latString, longitude: longString, completionHandlerForPutNewLocation: {(success, error) in
                 
                 if success {
                     performUIUpdatesOnMain {
@@ -68,11 +68,11 @@ class PlaceNewPinViewController: UIViewController, UITextFieldDelegate {
                 }
                 })
         } else {
-            ParseClient.sharedInstance().postNewLocation(mapString: (ParseClient.sharedInstance().myLocation?.mapString)!, mediaURL: mediaURL, latitude: latString, longitude: longString, completionHandlerForPostNewLocation: {(success, error) in
+            ParseClient.sharedInstance().postNewLocation(mapString: (StudentDataSource.sharedInstance.myLocation?.mapString)!, mediaURL: mediaURL, latitude: latString, longitude: longString, completionHandlerForPostNewLocation: {(success, error) in
                 
                 if success {
                     // Set flag to: location does exist
-                    ParseClient.sharedInstance().locationExists = true
+                    StudentDataSource.sharedInstance.locationExists = true
                     
                     performUIUpdatesOnMain {
                         // Get back to Intial view - Tab bar controller

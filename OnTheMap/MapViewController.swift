@@ -27,7 +27,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         
         // Make annotations using Student locations data and add them to the MapView
         var annotations = [MKPointAnnotation]()
-        for studentLocation in ParseClient.sharedInstance().studentLocations {
+        for studentLocation in StudentDataSource.sharedInstance.studentLocations {
             let latitude = CLLocationDegrees(studentLocation.latitude)
             let longitude = CLLocationDegrees(studentLocation.longitude)
             
@@ -44,7 +44,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         
         // Center map on user's current location
         var myCoordinates = CLLocationCoordinate2D(latitude: ParseClient.MapViewConstants.defaultLatitude, longitude: ParseClient.MapViewConstants.defaultLongitude)
-        if let myLocation = ParseClient.sharedInstance().myLocation {
+        if let myLocation = StudentDataSource.sharedInstance.myLocation {
             myCoordinates = CLLocationCoordinate2D(latitude: myLocation.latitude, longitude: myLocation.longitude)
         }
         let region = MKCoordinateRegionMakeWithDistance(myCoordinates, ParseClient.MapViewConstants.mapViewLargeScale, ParseClient.MapViewConstants.mapViewLargeScale)
@@ -72,7 +72,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             
             // Fing out which StudentLocation is selected
             var selectedStudentLocation: StudentLocation? = nil
-            for location in ParseClient.sharedInstance().studentLocations {
+            for location in StudentDataSource.sharedInstance.studentLocations {
                 if (location.latitude == view.annotation?.coordinate.latitude) && (location.longitude == view.annotation?.coordinate.longitude) {
                     selectedStudentLocation = location
                 }
@@ -91,14 +91,4 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             }
         }
     }
-    
-    //TODO: Do I really need shared instance of this VC?
-    
-//    // MARK: Map VC singleton shared instance
-//    class func sharedInstance() -> MapViewController {
-//        struct Singleton {
-//            static let sharedInstance = MapViewController()
-//        }
-//        return Singleton.sharedInstance
-//    }
 }

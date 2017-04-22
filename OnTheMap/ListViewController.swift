@@ -20,7 +20,7 @@ class ListViewController: UITableViewController {
     
     // MARK: TableView Delegate & Data Source functions
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return ParseClient.sharedInstance().studentLocations.count
+        return StudentDataSource.sharedInstance.studentLocations.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -28,8 +28,8 @@ class ListViewController: UITableViewController {
         let listCell = tableView.dequeueReusableCell(withIdentifier: ParseClient.StoryBoardIdentifiers.listCellReuseIdentifier) as UITableViewCell!
         
         // Setup cell
-        listCell?.textLabel?.text = "\(ParseClient.sharedInstance().studentLocations[indexPath.row].firstName) \(ParseClient.sharedInstance().studentLocations[indexPath.row].lastName)"
-        listCell?.detailTextLabel?.text = "\(ParseClient.sharedInstance().studentLocations[indexPath.row].mapString)"
+        listCell?.textLabel?.text = "\(StudentDataSource.sharedInstance.studentLocations[indexPath.row].firstName) \(StudentDataSource.sharedInstance.studentLocations[indexPath.row].lastName)"
+        listCell?.detailTextLabel?.text = "\(StudentDataSource.sharedInstance.studentLocations[indexPath.row].mapString)"
         
         return listCell!
     }
@@ -37,7 +37,7 @@ class ListViewController: UITableViewController {
     // Open the associated link (mediaURL) in a Default Browser
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        if let mediaURL = URL(string: ParseClient.sharedInstance().studentLocations[indexPath.row].mediaURL) {
+        if let mediaURL = URL(string: StudentDataSource.sharedInstance.studentLocations[indexPath.row].mediaURL) {
             UIApplication.shared.open(mediaURL, options: [:], completionHandler: nil)
         } else {
             showAlert(viewController: self, title: ParseClient.ErrorStrings.error, message: "This student location contains no valid URL to display", actionTitle: ParseClient.ErrorStrings.dismiss)

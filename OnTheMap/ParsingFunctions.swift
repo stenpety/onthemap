@@ -76,7 +76,7 @@ extension ParseClient {
                                                ParseClient.ParseResponseKeys.mediaURL:ParseClient.MapViewConstants.defaultMediaURL] as [String:AnyObject]
                 
                 // Init Model's 'myLocation' property
-                ParseClient.sharedInstance().myLocation = StudentLocation(parametersForMyLocation)
+                StudentDataSource.sharedInstance.myLocation = StudentLocation(parametersForMyLocation)
                 
                 completionHandlerForGetIserInfo(true, nil)
             } else {
@@ -111,7 +111,7 @@ extension ParseClient {
                 
                 // If failable init succeed then append location to the main array, if not (== nil) just skip
                 if let studentLocation = StudentLocation(location) {
-                    ParseClient.sharedInstance().studentLocations.append(studentLocation)
+                    StudentDataSource.sharedInstance.studentLocations.append(studentLocation)
                 }
             
             }
@@ -162,7 +162,7 @@ extension ParseClient {
         var headerParameters = ParseClient.JSONHeaderCommon.jsonHeaderCommonParse
         headerParameters[ParseClient.JSONHeaderField.contentType] = ParseClient.JSONHeaderValues.appJSON
         
-        let jsonBody = "{\"uniqueKey\": \"\(ParseClient.Constants.petrSteninUdacityID)\", \"firstName\": \"\(ParseClient.sharedInstance().myLocation!.firstName)\", \"lastName\": \"\(ParseClient.sharedInstance().myLocation!.lastName)\",\"mapString\": \"\(mapString)\", \"mediaURL\": \"\(mediaURL)\",\"latitude\": \(latitude), \"longitude\": \(longitude)}"
+        let jsonBody = "{\"uniqueKey\": \"\(ParseClient.Constants.petrSteninUdacityID)\", \"firstName\": \"\(StudentDataSource.sharedInstance.myLocation!.firstName)\", \"lastName\": \"\(StudentDataSource.sharedInstance.myLocation!.lastName)\",\"mapString\": \"\(mapString)\", \"mediaURL\": \"\(mediaURL)\",\"latitude\": \(latitude), \"longitude\": \(longitude)}"
         
         let _ = ParseClient.sharedInstance().taskForMethod(ParseClient.MethodTypes.post, withURL: urlForPostNewLocation, httpHeaderFieldValue: headerParameters, httpBody: jsonBody, completionHandlerForTask: {(data, error) in
             
@@ -173,7 +173,7 @@ extension ParseClient {
             
             let sessionInfo = data as! [String:AnyObject]
             if let objectID = sessionInfo[ParseClient.ParseResponseKeys.objectID] {
-                ParseClient.sharedInstance().myLocation?.objectID = (objectID as! String)
+                StudentDataSource.sharedInstance.myLocation?.objectID = (objectID as! String)
                 completionHandlerForPostNewLocation(true, nil)
             } else {
                 completionHandlerForPostNewLocation(false, NSError(domain: "postNewLocation", code: 1, userInfo: [NSLocalizedDescriptionKey:"Cannot post a new location"]))
@@ -189,7 +189,7 @@ extension ParseClient {
         var headerParameters = ParseClient.JSONHeaderCommon.jsonHeaderCommonParse
         headerParameters[ParseClient.JSONHeaderField.contentType] = ParseClient.JSONHeaderValues.appJSON
         
-        let jsonBody = "{\"uniqueKey\": \"\(ParseClient.Constants.petrSteninUdacityID)\", \"firstName\": \"\(ParseClient.sharedInstance().myLocation!.firstName)\", \"lastName\": \"\(ParseClient.sharedInstance().myLocation!.lastName)\",\"mapString\": \"\(mapString)\", \"mediaURL\": \"\(mediaURL)\",\"latitude\": \(latitude), \"longitude\": \(longitude)}"
+        let jsonBody = "{\"uniqueKey\": \"\(ParseClient.Constants.petrSteninUdacityID)\", \"firstName\": \"\(StudentDataSource.sharedInstance.myLocation!.firstName)\", \"lastName\": \"\(StudentDataSource.sharedInstance.myLocation!.lastName)\",\"mapString\": \"\(mapString)\", \"mediaURL\": \"\(mediaURL)\",\"latitude\": \(latitude), \"longitude\": \(longitude)}"
         
         let _ = ParseClient.sharedInstance().taskForMethod(ParseClient.MethodTypes.put, withURL: urlForPutNewLocation, httpHeaderFieldValue: headerParameters, httpBody: jsonBody, completionHandlerForTask: {(data, error) in
             

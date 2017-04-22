@@ -20,7 +20,7 @@ class TabManagerViewController: UITabBarController {
     // Launch VC to add a new pin
     @IBAction func addNewPin(_ sender: UIBarButtonItem) {
         
-        if ParseClient.sharedInstance().locationExists {
+        if StudentDataSource.sharedInstance.locationExists {
             let existAlert = UIAlertController(title: "Warning!", message: "Your location already exists. Do you want to overwrite it?", preferredStyle: .alert)
             existAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
             existAlert.addAction(UIAlertAction(title: "Overwrite!", style: .destructive, handler: {control in

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1A001B5D1E883DE000A339B5 /* AddNewPinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A001B5C1E883DE000A339B5 /* AddNewPinViewController.swift */; };
+		1A0A71311EAB521000982A0E /* StudentDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0A71301EAB521000982A0E /* StudentDataSource.swift */; };
 		1A160D141E8C3D3900623BC9 /* PlaceNewPinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A160D131E8C3D3900623BC9 /* PlaceNewPinViewController.swift */; };
 		1A39B88E1E83C9EE00726ACB /* ParseClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A39B88D1E83C9EE00726ACB /* ParseClient.swift */; };
 		1A39B8901E83CAB100726ACB /* StudentLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A39B88F1E83CAB100726ACB /* StudentLocation.swift */; };
@@ -26,6 +27,7 @@
 
 /* Begin PBXFileReference section */
 		1A001B5C1E883DE000A339B5 /* AddNewPinViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddNewPinViewController.swift; sourceTree = "<group>"; };
+		1A0A71301EAB521000982A0E /* StudentDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentDataSource.swift; sourceTree = "<group>"; };
 		1A160D131E8C3D3900623BC9 /* PlaceNewPinViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceNewPinViewController.swift; sourceTree = "<group>"; };
 		1A39B88D1E83C9EE00726ACB /* ParseClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseClient.swift; sourceTree = "<group>"; };
 		1A39B88F1E83CAB100726ACB /* StudentLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentLocation.swift; sourceTree = "<group>"; };
@@ -59,7 +61,6 @@
 			isa = PBXGroup;
 			children = (
 				1A39B88B1E83C9B900726ACB /* Parse */,
-				1A39B88C1E83C9C300726ACB /* Facebook */,
 			);
 			name = Clients;
 			sourceTree = "<group>";
@@ -68,18 +69,10 @@
 			isa = PBXGroup;
 			children = (
 				1A39B88D1E83C9EE00726ACB /* ParseClient.swift */,
-				1A39B88F1E83CAB100726ACB /* StudentLocation.swift */,
 				1A39B8911E83CC8400726ACB /* ParseConstants.swift */,
 				1A39B8931E851AFD00726ACB /* ParsingFunctions.swift */,
 			);
 			name = Parse;
-			sourceTree = "<group>";
-		};
-		1A39B88C1E83C9C300726ACB /* Facebook */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Facebook;
 			sourceTree = "<group>";
 		};
 		1A4152851E82A1CD0089DB3F = {
@@ -137,6 +130,8 @@
 		1A4152A51E82A40C0089DB3F /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				1A39B88F1E83CAB100726ACB /* StudentLocation.swift */,
+				1A0A71301EAB521000982A0E /* StudentDataSource.swift */,
 				1A39B88A1E83C9B200726ACB /* Clients */,
 			);
 			name = Model;
@@ -228,6 +223,7 @@
 				1A39B88E1E83C9EE00726ACB /* ParseClient.swift in Sources */,
 				1A4152941E82A1CD0089DB3F /* LoginViewController.swift in Sources */,
 				1A39B8921E83CC8400726ACB /* ParseConstants.swift in Sources */,
+				1A0A71311EAB521000982A0E /* StudentDataSource.swift in Sources */,
 				1A63BDD11E866233007D95E8 /* GlobalFunctions.swift in Sources */,
 				1A63BDD51E866A9E007D95E8 /* ListViewController.swift in Sources */,
 				1A39B8941E851AFD00726ACB /* ParsingFunctions.swift in Sources */,
