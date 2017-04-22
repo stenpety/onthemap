@@ -23,6 +23,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <activityIndicatorView hidden="YES" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="3UU-PG-jWm">
+                                <rect key="frame" x="169" y="315" width="37" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="color" red="0.20000000000000001" green="0.0" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                            </activityIndicatorView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="ime-hM-FtX">
                                 <rect key="frame" x="16" y="193.5" width="343" height="220"/>
                                 <subviews>
@@ -63,6 +68,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="loginActivityIndicator" destination="3UU-PG-jWm" id="Hok-Bp-wqv"/>
                         <outlet property="loginTextField" destination="tfj-xt-wBz" id="ahh-5g-YCZ"/>
                         <outlet property="passwordTextField" destination="PZT-yi-heF" id="SqZ-da-DZg"/>
                     </connections>

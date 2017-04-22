@@ -106,6 +106,9 @@ extension ParseClient {
                 return
             }
             
+            // Clean the storage array in order to prevent duplications:
+            StudentDataSource.sharedInstance.studentLocations = []
+            
             // 'location' in the next iteration is either a valid location record (dict [String:AnyObject]) or invalid one
             for location in arrayOfLocationDicts {
                 

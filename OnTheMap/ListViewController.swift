@@ -37,6 +37,9 @@ class ListViewController: UITableViewController {
     // Open the associated link (mediaURL) in a Default Browser
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+        // Deselect row:
+        tableView.deselectRow(at: indexPath, animated: true)
+        
         if let mediaURL = URL(string: StudentDataSource.sharedInstance.studentLocations[indexPath.row].mediaURL) {
             UIApplication.shared.open(mediaURL, options: [:], completionHandler: nil)
         } else {

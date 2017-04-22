@@ -9,7 +9,7 @@
 import UIKit
 import MapKit
 
-class LoginViewController: UIViewController, CLLocationManagerDelegate {
+class LoginViewController: UIViewController, CLLocationManagerDelegate, UITextFieldDelegate {
     
     // MARK: properties
     let locationManager = CLLocationManager()
@@ -17,6 +17,7 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate {
     // MARK: Outlets
     @IBOutlet weak var loginTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var loginActivityIndicator: UIActivityIndicatorView!
     
     
     // MARK: Life cycle
@@ -31,6 +32,10 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate {
         // Start Location manager
         CLLocationManager.locationServicesEnabled()
         locationManager.startUpdatingLocation()
+        
+        // Assign text fields delegates
+        loginTextField.delegate = self
+        passwordTextField.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -51,6 +56,11 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate {
     
     @IBAction private func loginWithUdacity(_ sender: UIButton) {
         
+        // Start Activity indicator
+        self.view.bringSubview(toFront: loginActivityIndicator)
+        loginActivityIndicator.startAnimating()
+        
+        // Start LOGIN process
         ParseClient.sharedInstance().getSessionAndUserID(loginVC: self, completionHandlerForLogin: {(success, error) in
             if success {
                 ParseClient.sharedInstance().getInitialUserInfo(completionHandlerForGetIserInfo: {(success, error) in
@@ -58,12 +68,14 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate {
                         ParseClient.sharedInstance().getAllStudentLocations(completionHandlerForGetAllStudentLocations: {(success, error) in
                             if success {
                                 performUIUpdatesOnMain {
-                                    self.completeLogin()
+                                    self.loginActivityIndicator.stopAnimating() //Stop Activity indicator
+                                    self.completeLogin() // Proceed with the next scene
                                 }
                             } else {
                                 performUIUpdatesOnMain {
                                     
                                     // Alert: Download of all Student Locations failed
+                                    self.loginActivityIndicator.stopAnimating() //Stop Activity indicator
                                     showAlert(viewController: self, title: ParseClient.ErrorStrings.error, message: (error?.userInfo[NSLocalizedDescriptionKey] as! String), actionTitle: ParseClient.ErrorStrings.dismiss)
                                 }
                             }
@@ -72,6 +84,7 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate {
                         performUIUpdatesOnMain {
                             
                             // Alert: Get initial user info failed
+                            self.loginActivityIndicator.stopAnimating() //Stop Activity indicator
                             showAlert(viewController: self, title: ParseClient.ErrorStrings.error, message: (error?.userInfo[NSLocalizedDescriptionKey] as! String), actionTitle: ParseClient.ErrorStrings.dismiss)
                         }
                     }
@@ -80,6 +93,7 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate {
                 performUIUpdatesOnMain {
                     
                     // Alert:
+                    self.loginActivityIndicator.stopAnimating() //Stop Activity indicator
                     showAlert(viewController: self, title: ParseClient.ErrorStrings.error, message: (error?.userInfo[NSLocalizedDescriptionKey] as! String), actionTitle: ParseClient.ErrorStrings.dismiss)
                 }
             }
@@ -97,6 +111,13 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate {
         let userLocation:CLLocation = locations[0]
         StudentDataSource.sharedInstance.myLocation?.latitude = userLocation.coordinate.latitude
         StudentDataSource.sharedInstance.myLocation?.longitude = userLocation.coordinate.longitude
+    }
+    
+    // MARK: Text Field Delegate
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        loginTextField.resignFirstResponder()
+        passwordTextField.resignFirstResponder()
+        return true
     }
 }
 
